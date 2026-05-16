@@ -1,0 +1,36 @@
+{
+  "id": 14,
+  "names": [
+    {
+      "name": "Rancho Santiago College",
+      "hasDepartments": true,
+      "hideInList": false
+    },
+    {
+      "name": "Santa Ana College",
+      "fromYear": 1997,
+      "hasDepartments": true,
+      "hideInList": false
+    }
+  ],
+  "code": "RSC",
+  "prefers2016LegacyReport": false,
+  "isCommunityCollege": true,
+  "category": 2,
+  "termType": 0,
+  "beginId": 0,
+  "termTypeAcademicYears": [
+    {
+      "termType": 0,
+      "fromYear": 2018
+    },
+    {
+      "termType": 0,
+      "fromYear": 1997
+    },
+    {
+      "termType": 0,
+      "fromYear": 1980
+    }
+  ]
+}

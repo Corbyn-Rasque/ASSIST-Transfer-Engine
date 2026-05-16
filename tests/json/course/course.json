@@ -1,0 +1,14 @@
+{
+    "courseIdentifierParentId": 340948,
+    "courseTitle": "Introductory Chemistry",
+    "courseNumber": "25",
+    "prefix": "CHEM",
+    "prefixParentId": 3868,
+    "prefixDescription": "Chemistry",
+    "departmentParentId": 2370,
+    "department": "Chemistry and Biochemistry",
+    "begin": "F2020",
+    "end": "",
+    "minUnits": 3.00,
+    "maxUnits": 3.00
+}

@@ -1,0 +1,6 @@
+{
+    "type":"NToNFollowing",
+    "fromAmount": 1,
+    "toAmount": 3,
+    "unitType":"Course"
+}

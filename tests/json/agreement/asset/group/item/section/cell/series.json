@@ -1,0 +1,14 @@
+{
+    "type": "Series",
+    "series": {},
+    "requisites": [],
+    "visibleCrossListedCourses": [],
+    "seriesAttributes": [],
+    "courseAttributes": [
+        {
+            "seriesCourseId": "a5dc7088-693c-4996-b93c-ee3dd2373048",
+            "position": 0,
+            "content": "Or equivalent"
+        }
+    ]
+}

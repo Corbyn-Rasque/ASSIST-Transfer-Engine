@@ -1,0 +1,14 @@
+{
+    "type": "RequirementGroup",
+    "hideSectionLetters": false,
+    "sections": [],
+    "attributes": [],
+    "showConjunctionBetweenSections": false,
+    "instruction": {
+        "type": "Conjunction",
+        "conjunction": "And",
+        "id": "7dc01e2b-0444-470e-184f-08dba898cc31",
+        "selectionType": "Complete"
+    },
+    "advisements": []
+}

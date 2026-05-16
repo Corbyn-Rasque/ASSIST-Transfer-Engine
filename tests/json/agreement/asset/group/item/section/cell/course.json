@@ -1,0 +1,20 @@
+ {
+    "type": "Course",
+    "course": {
+        "courseIdentifierParentId": 286382,
+        "courseTitle": "Visual Literacy",
+        "courseNumber": "1A",
+        "prefix": "ART",
+        "prefixParentId": 6130,
+        "prefixDescription": "Art",
+        "departmentParentId": 1135,
+        "department": "Art",
+        "begin": "F2016",
+        "end": "",
+        "minUnits": 5.0,
+        "maxUnits": 5.0
+    },
+    "visibleCrossListedCourses": [],
+    "requisites": [],
+    "courseAttributes": []
+}
