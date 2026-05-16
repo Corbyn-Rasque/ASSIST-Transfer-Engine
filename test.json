@@ -1,0 +1,32 @@
+{
+    "type": "Course",
+    "course": {
+        "courseIdentifierParentId": 286382,
+        "courseParentId": 286382,
+        "courseTitle": "Visual Literacy",
+        "courseNumber": "1A",
+        "prefix": "ART",
+        "prefixParentId": 6130,
+        "prefixDescription": "Art",
+        "departmentParentId": 1135,
+        "department": "Art",
+        "begin": "F2016",
+        "beginDate": "2016-08-01",
+        "beginTermId": 1234,
+        "end": "",
+        "isTerminated": false,
+        "hasOutline": true,
+        "isCsuTransferable": true,
+        "isUcTransferable": true,
+        "crosslistedCourses": [],
+        "pathways": [],
+        "minUnits": 5.0,
+        "maxUnits": 5.0
+    },
+    "visibleCrossListedCourses": [],
+    "requisites": [],
+    "courseAttributes": [],
+    "id": "ff11200e-32a1-46bb-8a8d-08dba897c33b",
+    "position": 0,
+    "attributes": []
+}
