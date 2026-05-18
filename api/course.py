@@ -3,7 +3,7 @@ from __future__ import annotations
 from uuid import UUID
 from enum import StrEnum
 from typing import Optional
-from datetime import date
+from datetime import datetime
 from pydantic import Field
 
 from api.agreement.attribute    import Attribute
@@ -51,11 +51,11 @@ class Course:
         departmentParentId:         int
         department:                 str
         begin:                      str
-        beginDate:                  date
+        beginDate:                  datetime
         beginTermId:                int
         end:                        str
-        endDate:                    Optional[date]  = Field(default = None)
-        endTermId:                  Optional[int]   = Field(default = None)
+        endDate:                    Optional[datetime]  = Field(default = None)
+        endTermId:                  Optional[int]       = Field(default = None)
         minUnits:                   int
         maxUnits:                   int
         isTerminated:               bool
@@ -64,6 +64,29 @@ class Course:
         isUcTransferable:           bool
         crosslistedCourses:         list[Course.Model]
         pathways:                   list[Pathway.Model]
+
+    class Cell:
+        class Crosslisted:
+            class Model (Monomorphic):
+                '''
+                This model represents a cross listed course for the course in this cell.
+
+                :course:    The cross listed course
+
+                [Documentation](https://prod.assistng.org/apidocs/docs/courses/get#course-cell-cross-listed)
+                '''
+                course: Course.Model
+
+        class Requisite:
+            class Model (Monomorphic):
+                '''
+                :course:    The pre-requisite or co-requisite course
+                :​type:      The type of requisite from [PreRequisite,CoRequisite]
+
+                [Documentation](https://prod.assistng.org/apidocs/docs/courses/get#course-cell-requisite)
+                '''
+                type:   Requisite.Type
+                course: Course.Model
 
 class Denied:
     class Model (Course.Model):
@@ -76,8 +99,8 @@ class Denied:
         [Course]: https://prod.assistng.org/apidocs/docs/courses/get#course-model
         [Documentation](https://prod.assistng.org/apidocs/docs/courses/get#denied-course-model)
         '''
-        deniedOn:                   date
-        attributes:                 list[Attribute]
+        deniedOn:                   datetime
+        attributes:                 list[Attribute.Model]
 
 class Requisite:
     class Model (Course.Model):
@@ -98,28 +121,6 @@ class Requisite:
     class Type (StrEnum):
         PreRequisite = 'PreRequisite'
         CoRequisite  = 'CoRequisite'
-
-class CourseCellCrosslisted:
-    class Model (Monomorphic):
-        '''
-        This model represents a cross listed course for the course in this cell.
-
-        :course:    The cross listed course
-
-        [Documentation](https://prod.assistng.org/apidocs/docs/courses/get#course-cell-cross-listed)
-        '''
-        course: Course.Model
-
-class CourseCellRequisite:
-    class Model (Monomorphic):
-        '''
-        :course:    The pre-requisite or co-requisite course
-        :​type:      The type of requisite from [PreRequisite,CoRequisite]
-
-        [Documentation](https://prod.assistng.org/apidocs/docs/courses/get#course-cell-requisite)
-        '''
-        type:   Requisite.Type
-        course: Course.Model
 
 class Pathway:
     class Model (Monomorphic):
@@ -150,10 +151,10 @@ class Pathway:
         subexpectationId:           int
         subexpectationName:         str
         begin:                      str
-        beginDate:                  date
+        beginDate:                  datetime
         beginTermId:                int
         end:                        str
-        endDate:                    Optional[date]
+        endDate:                    Optional[datetime]
         endTermId:                  Optional[int]
 
 Course.Model.model_rebuild()

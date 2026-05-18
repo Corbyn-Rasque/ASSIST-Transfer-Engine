@@ -82,7 +82,7 @@ class Advisement:
 
     Quantifier: TypeAlias = Unit.Type
 
-class CompleteAdditionalUnits (Advisement.Model):
+class AdditionalNToReach (Advisement.Model):
     '''
     This model represents a sub instruction to complete additional units to reach N total.
 

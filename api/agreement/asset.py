@@ -9,7 +9,7 @@ from api.agreement.advisement       import Advisement
 from api.agreement.instruction      import Instruction
 from api.agreement.series           import Series as BaseSeries
 from api.agreement.generaleducation import GeneralEducation as BaseGeneralEducation
-from api.course                     import Course as BaseCourse, CourseCellCrosslisted, CourseCellRequisite
+from api.course                     import Course as BaseCourse
 
 from api.types import Monomorphic, Polymorphic
 
@@ -41,8 +41,11 @@ class _Asset:
         '''
         The base template asset model in which other types of template assets are derived.
 
-        :position: The position this template asset should appear on the agreement
-        :​type: The type of asset from `Asset.Type`.
+        :position:  The position this template asset should appear on the agreement
+        :area:      The area on an Articulation Template from `Asset.Area`. Certain elements are only allowed to be placed in some areas
+        :​type:      The type of asset from `Asset.Type`.
+
+        [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-asset)
         '''
         type:       _Asset.Type
         position:   int
@@ -190,8 +193,8 @@ class _Section (_Item.Model):
         '''
         type:                       Literal[_Section.Cell.Type.Course]
         course:                     BaseCourse.Model
-        visibleCrossListedCourses:  list[CourseCellCrosslisted.Model]
-        requisites:                 list[CourseCellRequisite.Model]
+        visibleCrossListedCourses:  list[BaseCourse.Cell.Crosslisted.Model]
+        requisites:                 list[BaseCourse.Cell.Requisite.Model]
         courseAttributes:           list[Attribute.Model]
 
     class Series (Cell.Model):

@@ -1,8 +1,16 @@
 import pytest
 
-from pathlib    import Path
-from typing     import Callable
+from tests.json.data        import Registry, Load, Compose
+from api.agreement.asset    import Asset
 
-from tests.json.data            import Model, Load, Compose
-from api.agreement.asset import Asset
-import api.agreement.asset
+Example = Registry('asset')
+
+Example +=  Load[Asset.Model](Example.folder)('asset')
+Example +=  Load[Asset.Model](Example.folder)('asset', 'general/title')
+Example +=  Load[Asset.Model](Example.folder)('asset', 'general/text')
+Example +=  Load[Asset.Model](Example.folder)('asset', 'requirement/title')
+
+
+@pytest.fixture
+def course():
+    return Example

@@ -2,12 +2,16 @@ import pytest
 from pathlib import Path
 
 from tests.json.data    import Model, Load, Compose
-from api.year        import Year
+from api.year           import YearTerm, AcademicYear
 
 class Example: 
     class Year:
-        folder = Path('')
+        folder = Path('year')
 
 @pytest.fixture
-def year() -> Model:
-    return Load[Year](Example.Year.folder)('year')
+def yearterm() -> Model:
+    return Load[YearTerm](Example.Year.folder)('yearterm')
+
+@pytest.fixture
+def yearterm() -> Model:
+    return Load[AcademicYear](Example.Year.folder)('academicyear')

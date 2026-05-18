@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import ClassVar
 from functools import reduce
 from pydantic import BaseModel
 
@@ -46,6 +47,7 @@ class Load (Model, metaclass = LoadMeta):
     model:      BaseModel
 
     def __init__(self, model: BaseModel, folder: str, *files: str):
+        self.type       = model
         self.dictionary = self.load(folder)(*files)
         self.model      = model.model_validate(self.dictionary)
     
@@ -83,3 +85,26 @@ class Compose (Model, metaclass = ComposeMeta):
                 case _:       self.dictionary[key] = value
 
         self.model = model.model_validate(self.dictionary)
+
+class RegistryMeta(type):
+    def __init__(cls, name, bases, namespace, **kwargs):
+        super().__init__(name, bases, namespace, **kwargs)
+        cls.registry = {}
+        cls.folder   = Path('')
+
+    def __call__(cls, folder: str):
+        cls.folder = Path(folder)
+        return cls
+
+    def __setitem__(cls, key: type, value):
+        cls.registry[key] = value
+
+    def __getitem__(cls, key: type):
+        return cls.registry[key]
+    
+    def __iadd__(cls, value):
+        cls.registry[value.type] = value
+        return cls
+
+class Registry(metaclass = RegistryMeta):
+    pass
