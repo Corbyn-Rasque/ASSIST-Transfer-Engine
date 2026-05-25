@@ -1,0 +1,14 @@
+{
+    "id": "9ed46f47-0d43-48a4-d7f6-08dba8a2fddc",
+    "variantIds": [
+        "794842ef-c525-4bc1-98f1-50e65cd59233"
+    ],
+    "sendingArticulation": {
+        "noArticulationReason": null,
+        "deniedCourses": [],
+        "items": [],
+        "courseGroupConjunctions": [],
+        "type": "TemplateOverride",
+        "attributes": []
+    }
+}

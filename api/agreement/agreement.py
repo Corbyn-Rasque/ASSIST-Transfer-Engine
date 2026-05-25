@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime   import date
+from datetime   import datetime
 from enum       import StrEnum
 
 from api.types import Monomorphic
@@ -31,7 +31,7 @@ class Agreement:
         '''
         name:                   str
         type:                   Agreement.Type
-        publishDate:            date
+        publishDate:            datetime
         receivingInstitution:   str
         sendingInstitution:     str
         academicYear:           str

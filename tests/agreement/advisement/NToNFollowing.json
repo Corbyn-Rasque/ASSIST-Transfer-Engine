@@ -1,0 +1,8 @@
+{
+    "position": 0,
+    "type": "NToNFollowing",
+    "selectionType": "Complete",
+    "fromAmount": 1,
+    "toAmount": 3,
+    "unitType": "Course"
+}

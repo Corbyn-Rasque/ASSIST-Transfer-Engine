@@ -11,9 +11,9 @@ from api.agreement.series           import Series as BaseSeries
 from api.agreement.generaleducation import GeneralEducation as BaseGeneralEducation
 from api.course                     import Course as BaseCourse
 
-from api.types import Monomorphic, Polymorphic
+from api.types import Monomorphic, Polymorphic, Models
 
-class Transferability:
+class _Transferability:
     class Model (Monomorphic):
         '''
         This model contains the details of a transferability object such as CSUGE, CSUAI, and IGETC.
@@ -21,8 +21,10 @@ class Transferability:
         :areaType:  The type of transferability area from `Transferability.Area`
         :name:      The name of the transferability
         :code:      The transferability code or short name
+
+        [Documentatation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#transferability-model)
         '''
-        areaType:   Transferability.Area
+        areaType:   _Transferability.Area
         name:       str
         code:       str
 
@@ -36,7 +38,7 @@ class Transferability:
         CSUAI = 'CSUAI'
         IGETC = 'IGETC'
 
-class _Asset:
+class _Asset (Models):
     class Model (Polymorphic):
         '''
         The base template asset model in which other types of template assets are derived.
@@ -100,7 +102,7 @@ class _Asset:
         type:       Literal[_Asset.Type.RequirementTitle]
         content:    str
 
-class _Item:
+class _Item (Models):
     class Model (Polymorphic):
         '''
         The base model for template group items. Other template group items are derived from this model.
@@ -118,6 +120,8 @@ class _Item:
     class Type (StrEnum):
         Section         = 'Section'
         SectionHeader   = 'SectionHeader'
+
+    Transferability:        ClassVar[TypeAlias] = _Transferability
 
 class _SectionHeader (_Item.Model):
     '''
@@ -144,22 +148,23 @@ class _Section (_Item.Model):
     [Template Group Item]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-item
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-item-section)
     '''
-    id:         UUID
     type:       Literal[_Item.Type.Section]
     rows:       list[_Section.Row.Model]
     attributes: list[Attribute.Model]
 
-    class Cell:
+    class Cell (Models):
         class Model (Polymorphic):
             '''
             This is the base model for Template Group Section Cells. The other cell types derive from this model.
 
+            :id:            [ Undocumented, found in example JSON ]
             :position:      The position this cell should appear on the section row
             :attributes:    The attributes associated to this cell
             :​type:          The type of cell from `Group.Section.Cell.Type`
 
             [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell)
             '''
+            id:         UUID
             type:       _Section.Cell.Type
             position:   int
             attributes: list[Attribute.Model]
@@ -231,7 +236,7 @@ class _Section (_Item.Model):
         '''
         type:                           Literal[_Section.Cell.Type.GeneralEducation]
         generalEducationArea:           BaseGeneralEducation
-        generalEducationAreaAttributes: list[Attribute]
+        generalEducationAreaAttributes: list[Attribute.Model]
 
     class CSUGE (Cell.Model):
         '''
@@ -244,7 +249,7 @@ class _Section (_Item.Model):
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-csuge-cell)
         '''
         type:           Literal[_Section.Cell.Type.CSUGE]
-        csuge:          Transferability
+        csuge:          _Transferability
 
     class CSUAI (Cell.Model):
         '''
@@ -257,7 +262,7 @@ class _Section (_Item.Model):
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-csuai-cell)
         '''
         type:           Literal[_Section.Cell.Type.CSUAI]
-        csuai:          Transferability
+        csuai:          _Transferability
 
     class IGETC (Cell.Model):
         '''
@@ -270,7 +275,7 @@ class _Section (_Item.Model):
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-igetc-cell)
         '''
         type:           Literal[_Section.Cell.Type.IGETC]
-        igetc:          Transferability
+        igetc:          _Transferability
 
     class Row:
         class Model (Monomorphic):
@@ -303,7 +308,7 @@ class _Group (_Asset.Model):
     attributes:                     list[Attribute.Model]
     showConjunctionBetweenSections: bool
     instruction:                    Instruction.Model
-    advisements:                    list[Advisement.Model]
+    advisements:                    list[Advisement.Models]
 
     Item:           ClassVar[TypeAlias] = _Item
     SectionHeader:  ClassVar[TypeAlias] = _SectionHeader
@@ -315,7 +320,17 @@ class Asset (_Asset):
         Item:       ClassVar[TypeAlias] = _Item
         Section:    ClassVar[TypeAlias] = _Section
 
-class PublishedAgreementAsset:
+Asset.Models                    = _Asset.annotated()
+Asset.Group.Item.Models         = _Item.annotated()
+Asset.Group.Section.Cell.Models = Asset.Group.Section.Cell.annotated()
+
+_Item.Model.model_rebuild()
+_Section.model_rebuild()
+_Section.Row.Model.model_rebuild()
+_Group.model_rebuild()
+_Asset.Model.model_rebuild()
+
+class PublishedAgreement:
     class Model (Monomorphic):
         '''
         This model represents a template asset for “All” Agreements. This model is used to represent the individual agreements that make up the “All” agreement.
@@ -323,12 +338,7 @@ class PublishedAgreementAsset:
         :name:      The name of the agreement (usually a major or a GE)
         :assets:    The template assets on the agreement.
         '''
-        name:   str
-        assets: list[_Asset.Model]
+        name:           str
+        templateAssets: list[Asset.Models]
 
-_Item.Model.model_rebuild()
-_Section.model_rebuild()
-_Section.Row.Model.model_rebuild()
-_Group.model_rebuild()
-_Asset.Model.model_rebuild()
-PublishedAgreementAsset.Model.model_rebuild()
+PublishedAgreement.Model.model_rebuild()

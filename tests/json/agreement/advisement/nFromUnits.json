@@ -1,6 +1,0 @@
-{
-    "type": "NFromUnits",
-    "amount": 3,
-    "amountQuantifier": "AtLeast",
-    "amountUnitType": "Quarter"
-}

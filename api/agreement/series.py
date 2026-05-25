@@ -109,3 +109,7 @@ class Series:
     Crosslisted:    TypeAlias = Crosslisted
     Attribute:      TypeAlias = Attribute
     Cell:           TypeAlias = Cell
+
+Series.Model.model_rebuild(_types_namespace={
+    'Series': Series,
+})

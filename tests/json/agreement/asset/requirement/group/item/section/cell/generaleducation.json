@@ -1,9 +1,0 @@
-{
-    "type": "GeneralEducation",
-    "generalEducationArea": {
-        "code": "EUR",
-        "name": "European Traditions Requirement",
-        "courses": []
-    },
-    "generalEducationAreaAttributes": []
-}

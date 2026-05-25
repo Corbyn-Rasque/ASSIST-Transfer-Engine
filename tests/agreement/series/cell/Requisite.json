@@ -1,0 +1,29 @@
+{
+    "seriesCourseId": "3376ecd9-a59e-4a1a-8b2d-8011af5400cf",
+    "type": "PreRequisite",
+    "course": {
+        "courseIdentifierParentId": 340948,
+        "courseParentId": 340900,
+        "courseTitle": "Introductory Chemistry",
+        "courseNumber": "25",
+        "prefix": "CHEM",
+        "prefixParentId": 3868,
+        "prefixDescription": "Chemistry",
+        "departmentParentId": 2370,
+        "department": "Chemistry and Biochemistry",
+        "begin": "F2020",
+        "beginDate": "2020-08-01T00:00:00",
+        "beginTermId": 241,
+        "end": "",
+        "endDate": null,
+        "endTermId": null,
+        "minUnits": 3.00,
+        "maxUnits": 3.00,
+        "isTerminated": false,
+        "hasOutline": true,
+        "isCsuTransferable": true,
+        "isUcTransferable": false,
+        "crosslistedCourses": [],
+        "pathways": []
+    }
+}

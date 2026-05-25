@@ -1,0 +1,19 @@
+{
+    "type": "GeneralEducation",
+    "sendingArticulation": {
+        "noArticulationReason": null,
+        "deniedCourses": [],
+        "items": [],
+        "courseGroupConjunctions": [],
+        "type": "SendingArticulation",
+        "attributes": []
+    },
+    "templateOverrides": [],
+    "attributes": [],
+    "receivingAttributes": [],
+    "generalEducationArea": {
+        "code": "Area D",
+        "name": "Area D: Social Sciences"
+    },
+    "generalEducationAreaAttributes": []
+}

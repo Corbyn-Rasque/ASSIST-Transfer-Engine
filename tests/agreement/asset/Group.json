@@ -1,0 +1,11 @@
+{
+    "type": "RequirementGroup",
+    "position": 0,
+    "area": "Requirements",
+    "hideSectionLetters": false,
+    "sections": [],
+    "attributes": [],
+    "showConjunctionBetweenSections": false,
+    "instruction": {},
+    "advisements": []
+}

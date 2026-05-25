@@ -1,0 +1,14 @@
+{
+    "type": "Transferability",
+    "sendingArticulation": {
+        "noArticulationReason": null,
+        "deniedCourses": [],
+        "items": [],
+        "courseGroupConjunctions": [],
+        "type": "SendingArticulation",
+        "attributes": []
+    },
+    "templateOverrides": [],
+    "attributes": [],
+    "receivingAttributes": []
+}

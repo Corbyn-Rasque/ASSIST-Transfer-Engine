@@ -3,18 +3,16 @@ from __future__ import annotations
 from enum       import StrEnum
 from typing     import Literal, TypeAlias
 
-from api.types      import Polymorphic
+from api.types      import Models, Polymorphic
 
-class Advisement:
+class Advisement (Models):
     class Model (Polymorphic):
         '''
         The advisement model can be composed on various places on the articulation. This is the base advisement model from which other advisement types are derived.
 
         :position:      The position in the array that the advisement should display
-        :Type:          The type of advisement from the `AdvisementBasemodel.Type` enum.
+        :​type:          The type of advisement from the `AdvisementBasemodel.Type` enum.
         :selectionType: The type of selection for the advisement from the `Advisment.Selection` enum.
-        <!-- :type:     The type of advisement from the `AdvisementBasemodel.Type` enum.
-        -->
 
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/advisement#advisement-base-model)
         '''
@@ -80,7 +78,10 @@ class Advisement:
             Emphases        = 'Emphases'
             Specializations = 'Specializations'
 
-    Quantifier: TypeAlias = Unit.Type
+    class Quantifier (StrEnum):
+        none    = 'None'
+        UpTo    = 'UpTo'
+        AtLeast = 'AtLeast'
 
 class AdditionalNToReach (Advisement.Model):
     '''
@@ -180,3 +181,5 @@ class NToNFollowing (Advisement.Model):
     fromAmount:         int
     toAmount:           int
     unitType:           Advisement.Unit.Type
+
+Advisement.Models = Advisement.annotated()

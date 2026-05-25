@@ -1,0 +1,18 @@
+{
+    "type": "Requirement",
+    "sendingArticulation": {
+        "noArticulationReason": null,
+        "deniedCourses": [],
+        "items": [],
+        "courseGroupConjunctions": [],
+        "type": "SendingArticulation",
+        "attributes": []
+    },
+    "templateOverrides": [],
+    "attributes": [],
+    "receivingAttributes": [],
+    "requirement": {
+        "name": "LOWER-DIVISION WRITING"
+    },
+    "requirementAttributes": []
+}

@@ -1,0 +1,24 @@
+{
+    "type": "Series",
+    "sendingArticulation": {
+        "noArticulationReason": null,
+        "deniedCourses": [],
+        "items": [],
+        "courseGroupConjunctions": [],
+        "type": "SendingArticulation",
+        "attributes": []
+    },
+    "templateOverrides": [],
+    "attributes": [],
+    "receivingAttributes": [],
+    "series": {
+        "conjunction": "And",
+        "name": "CHEM 1A, CHEM 1AL, CHEM 1B, CHEM 1BL, CHEM 1C, CHEM 1CL",
+        "courses": [],
+        "id": "3376ecd9-a59e-4a1a-8b2d-8011af5400cf",
+        "position": 1
+    },
+    "visibleCrossListedCourses": [],
+    "courseAttributes": [],
+    "seriesAttributes": []
+}

@@ -1,0 +1,8 @@
+{
+    "position": 0,
+    "type": "NFromUnits",
+    "selectionType": "Complete",
+    "amount": 3,
+    "amountQuantifier": "AtLeast",
+    "amountUnitType": "Quarter"
+}
