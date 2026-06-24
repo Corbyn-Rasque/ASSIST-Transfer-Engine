@@ -6,9 +6,9 @@ from typing import Optional
 from datetime import datetime
 from pydantic import Field
 
-from api.agreement.attribute    import Attribute
+from sources.api.agreement.attribute    import Attribute
 
-from api.types                  import Monomorphic
+from sources.api.types                  import Monomorphic
 
 class Course:
     class Model (Monomorphic):
@@ -42,7 +42,7 @@ class Course:
         [Documentation](https://prod.assistng.org/apidocs/docs/courses/get#course-model)
         '''
         courseIdentifierParentId:   int
-        courseParentId:             int
+        courseParentId:             int | None          = None
         courseTitle:                str
         courseNumber:               str
         prefix:                     str
@@ -51,19 +51,21 @@ class Course:
         departmentParentId:         int
         department:                 str
         begin:                      str
-        beginDate:                  datetime
-        beginTermId:                int
+        beginDate:                  datetime | None     = None
+        beginTermId:                int | None          = None
         end:                        str
-        endDate:                    Optional[datetime]  = Field(default = None)
-        endTermId:                  Optional[int]       = Field(default = None)
-        minUnits:                   int
-        maxUnits:                   int
-        isTerminated:               bool
-        hasOutline:                 bool
-        isCsuTransferable:          bool
-        isUcTransferable:           bool
-        crosslistedCourses:         list[Course.Model]
-        pathways:                   list[Pathway.Model]
+        endDate:                    datetime | None     = None
+        endTermId:                  int | None          = None
+        # endDate:                    Optional[datetime]  = Field(default = None)
+        # endTermId:                  Optional[int]       = Field(default = None)
+        minUnits:                   float
+        maxUnits:                   float
+        isTerminated:               bool | None         = None
+        hasOutline:                 bool | None         = None
+        isCsuTransferable:          bool | None         = None
+        isUcTransferable:           bool | None         = None
+        crosslistedCourses:         list[Course.Model] | None = None
+        pathways:                   list[Pathway.Model] | None = None
 
     class Cell:
         class Crosslisted:

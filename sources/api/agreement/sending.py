@@ -4,11 +4,11 @@ from uuid import UUID
 from enum import StrEnum
 from typing import Literal, Optional, TypeAlias
 
-from api.agreement.attribute    import Attribute as BaseAttribute
-from api.agreement.advisement   import Advisement as BaseAdvisement
-from api.course                 import Course as BaseCourse, Denied as BaseDenied, Requisite as BaseRequisite
+from sources.api.agreement.attribute    import Attribute as BaseAttribute
+from sources.api.agreement.advisement   import Advisement as BaseAdvisement
+from sources.api.course                 import Course as BaseCourse, Denied as BaseDenied, Requisite as BaseRequisite
 
-from api.types                  import Monomorphic, Polymorphic, Models
+from sources.api.types                  import Monomorphic, Polymorphic, Models
 
 class _Item (Models):
     class Model (Polymorphic):

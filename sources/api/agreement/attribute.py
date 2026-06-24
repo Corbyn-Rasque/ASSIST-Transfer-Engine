@@ -1,4 +1,4 @@
-from api.types import Monomorphic
+from sources.api.types import Monomorphic
 
 class Attribute:
     class Model (Monomorphic):

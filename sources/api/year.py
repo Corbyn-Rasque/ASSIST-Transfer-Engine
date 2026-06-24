@@ -1,7 +1,7 @@
 from __future__ import annotations
 from datetime import date
 
-from api.types import Monomorphic
+from sources.api.types import Monomorphic
 
 class AcademicYear:
     class Model (Monomorphic):

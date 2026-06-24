@@ -2,20 +2,20 @@ import pytest, glob
 from typing import Annotated
 from pydantic import BaseModel, TypeAdapter
 
-import api.agreement.advisement         as advisement
-import api.agreement.agreement          as agreement
-import api.agreement.asset              as asset
-import api.agreement.attribute          as attribute
-import api.agreement.generaleducation   as generaleducation
-import api.agreement.instruction        as instruction
-import api.agreement.receiving          as receiving
-import api.agreement.requirement        as requirement
-import api.agreement.sending            as sending
-import api.agreement.series             as series
+import sources.api.agreement.advisement         as advisement
+import sources.api.agreement.agreement          as agreement
+import sources.api.agreement.asset              as asset
+import sources.api.agreement.attribute          as attribute
+import sources.api.agreement.generaleducation   as generaleducation
+import sources.api.agreement.instruction        as instruction
+import sources.api.agreement.receiving          as receiving
+import sources.api.agreement.requirement        as requirement
+import sources.api.agreement.sending            as sending
+import sources.api.agreement.series             as series
 
-import api.course                       as course
-import api.institution                  as institution
-import api.year                         as year
+import sources.api.course                       as course
+import sources.api.institution                  as institution
+import sources.api.year                         as year
 
 
 def load(model: BaseModel | Annotated, location: str):

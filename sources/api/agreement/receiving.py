@@ -3,14 +3,14 @@ from __future__ import annotations
 from enum       import StrEnum
 from typing     import Literal
 
-from api.agreement.attribute        import Attribute
-from api.course                     import Course as BaseCourse
-from api.agreement.series           import Series as BaseSeries
-from api.agreement.requirement      import Requirement as BaseRequirement
-from api.agreement.generaleducation import GeneralEducation as BaseGeneralEducation
-from api.agreement.sending          import SendingArticulation, SendingTemplateArticulation
+from sources.api.agreement.attribute        import Attribute
+from sources.api.course                     import Course as BaseCourse
+from sources.api.agreement.series           import Series as BaseSeries
+from sources.api.agreement.requirement      import Requirement as BaseRequirement
+from sources.api.agreement.generaleducation import GeneralEducation as BaseGeneralEducation
+from sources.api.agreement.sending          import SendingArticulation, SendingTemplateArticulation
 
-from api.types import Polymorphic, Models
+from sources.api.types import Polymorphic, Models
 
 class ReceivingArticulation (Models):
     class Model (Polymorphic):
@@ -26,10 +26,10 @@ class ReceivingArticulation (Models):
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/receiving#base-articulation-model)
         '''
         type:                   ReceivingArticulation.Type
-        sendingArticulation:    SendingArticulation.Model
-        templateOverrides:      list[SendingTemplateArticulation.Model]
-        attributes:             list[Attribute.Model]
-        receivingAttributes:    list[Attribute.Model]
+        sendingArticulation:    SendingArticulation.Model | None     = None
+        templateOverrides:      list[SendingTemplateArticulation.Model] | None = None
+        attributes:             list[Attribute.Model] | None         = None
+        receivingAttributes:    list[Attribute.Model] | None         = None
 
     class Type (StrEnum):
         Course              = 'Course'
@@ -52,8 +52,8 @@ class Course (ReceivingArticulation.Model):
     '''
     type:                       Literal[ReceivingArticulation.Type.Course]
     course:                     BaseCourse.Model
-    visibleCrossListedCourses:  list[BaseCourse.Model]
-    courseAttributes:           list[Attribute.Model]
+    visibleCrossListedCourses:  list[BaseCourse.Model] | None = None
+    courseAttributes:           list[Attribute.Model] | None = None
 
 class Series (ReceivingArticulation.Model):
     '''
@@ -70,9 +70,9 @@ class Series (ReceivingArticulation.Model):
     '''
     type:                       Literal[ReceivingArticulation.Type.Series]
     series:                     BaseSeries.Model
-    visibleCrossListedCourses:  list[BaseSeries.Crosslisted.Model]
-    courseAttributes:           list[BaseSeries.Attribute.Model]
-    seriesAttributes:           list[Attribute.Model]
+    visibleCrossListedCourses:  list[BaseSeries.Crosslisted.Model] | None = None
+    courseAttributes:           list[BaseSeries.Attribute.Model] | None = None
+    seriesAttributes:           list[Attribute.Model] | None = None
 
 class Requirement (ReceivingArticulation.Model):
     '''

@@ -4,7 +4,7 @@ from enum import IntEnum
 from typing import Optional
 from pydantic import Field, BaseModel
 
-from api.types import Monomorphic
+from sources.api.types import Monomorphic
 
 class Institution:
     class Model (Monomorphic):

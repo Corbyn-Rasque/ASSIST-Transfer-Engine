@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime   import datetime
 from enum       import StrEnum
 
-from api.types import Monomorphic
+from sources.api.types import Monomorphic
 
 class Agreement:
     class Model (Monomorphic):

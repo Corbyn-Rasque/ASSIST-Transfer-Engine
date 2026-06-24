@@ -4,10 +4,10 @@ from uuid import UUID
 from enum import StrEnum
 from typing import TypeAlias
 
-from api.course import Course as BaseCourse
-from api.agreement.attribute import Attribute as BaseAttribute
+from sources.api.course import Course as BaseCourse
+from sources.api.agreement.attribute import Attribute as BaseAttribute
 
-from api.types import Monomorphic
+from sources.api.types import Monomorphic
 
 class Course:
     class Model (BaseCourse.Model):
@@ -20,8 +20,8 @@ class Course:
         [Course]: https://prod.assistng.org/apidocs/docs/courses/get#course-model
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/series#series-course-model)
         '''
-        id:         UUID
-        position:   int
+        id:         UUID | None = None
+        position:   int | None  = None
 
 class Crosslisted:
     class Model (Course.Model):
@@ -95,6 +95,7 @@ class Series:
         conjunction:    Series.Conjunction
         name:           str
         courses:        list[Course.Model]
+        seriesPathways: list | None = None # Added per web scraper
 
     class Conjunction (StrEnum):
         '''

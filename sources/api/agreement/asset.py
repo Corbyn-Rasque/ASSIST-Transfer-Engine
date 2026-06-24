@@ -4,14 +4,14 @@ from uuid       import UUID
 from enum       import StrEnum
 from typing     import ClassVar, Literal, TypeAlias
 
-from api.agreement.attribute        import Attribute
-from api.agreement.advisement       import Advisement
-from api.agreement.instruction      import Instruction
-from api.agreement.series           import Series as BaseSeries
-from api.agreement.generaleducation import GeneralEducation as BaseGeneralEducation
-from api.course                     import Course as BaseCourse
+from sources.api.agreement.attribute        import Attribute
+from sources.api.agreement.advisement       import Advisement
+from sources.api.agreement.instruction      import Instruction
+from sources.api.agreement.series           import Series as BaseSeries
+from sources.api.agreement.generaleducation import GeneralEducation as BaseGeneralEducation
+from sources.api.course                     import Course as BaseCourse
 
-from api.types import Monomorphic, Polymorphic, Models
+from sources.api.types import Monomorphic, Polymorphic, Models
 
 class _Transferability:
     class Model (Monomorphic):
@@ -49,6 +49,7 @@ class _Asset (Models):
 
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-asset)
         '''
+
         type:       _Asset.Type
         position:   int
         area:       _Asset.Area
@@ -307,7 +308,7 @@ class _Group (_Asset.Model):
     sections:                       list[_Item.Model]
     attributes:                     list[Attribute.Model]
     showConjunctionBetweenSections: bool
-    instruction:                    Instruction.Model
+    instruction:                    Instruction.Model | None
     advisements:                    list[Advisement.Models]
 
     Item:           ClassVar[TypeAlias] = _Item
