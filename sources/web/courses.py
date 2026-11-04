@@ -48,11 +48,11 @@ class Notation (BaseModel):
 #     notations:                  list
 
 class Course(ApiCourse.Model):
-    # Fields missing from scraper data
+    # Fields missing from website data
     departmentParentId: int | None  = None  # type: ignore[assignment]
     department:         str | None  = None  # type: ignore[assignment]
 
-    # Scraper-only fields
+    # Website-only fields
     footnoteParentIds:  list        = []
     isRepeatable:       bool        = False
     identifier:         str         = ""

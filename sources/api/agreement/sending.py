@@ -145,7 +145,7 @@ class _CourseGroupCourse (_CourseGroup.Item.Model, _CourseGroup.Item.Models):
     minUnits:                               float
     maxUnits:                               float
     publishedCourseIdentifierYearTermId:    Optional[int]               = None
-    pathways:                               list[BasePathway.Model]     | None = None # Added per web scraper
+    pathways:                               list[BasePathway.Model]     | None = None # Added per website data
 
 class _CourseGroupAdvisement (_CourseGroup.Item.Model, _CourseGroup.Item.Models):
     '''

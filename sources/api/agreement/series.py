@@ -95,7 +95,7 @@ class Series:
         conjunction:    Series.Conjunction
         name:           str
         courses:        list[Course.Model]
-        seriesPathways: list | None = None # Added per web scraper
+        seriesPathways: list | None = None # Added per website data
 
     class Conjunction (StrEnum):
         '''

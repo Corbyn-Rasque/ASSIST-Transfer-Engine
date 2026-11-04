@@ -2,7 +2,7 @@ import json
 from enum                           import StrEnum
 from pydantic                       import TypeAdapter
 
-from sources.web.scraper            import Scraper
+from sources.web.client             import Client
 
 from sources.web.courses            import List as CourseList
 from sources.web.institution        import Institution
@@ -24,13 +24,13 @@ class Endpoint (StrEnum):
     YEARS           = API + 'AcademicYears'
 
 class Request:
-    scraper: Scraper
+    client: Client
 
     def __init__(self):
-        self.scraper = Scraper(ROOT)
+        self.client = Client(ROOT)
 
     def areas(self) -> list[Area]:
-        response = self.scraper.get(Endpoint.AREAS)
+        response = self.client.get(Endpoint.AREAS)
         return TypeAdapter(list[Area]).validate_json(response)
 
     def courses(self, 
@@ -39,7 +39,7 @@ class Request:
                 listType:                   CourseList.Type
                 ) -> CourseList:
         
-        response = self.scraper.get(Endpoint.COURSES, params = {
+        response = self.client.get(Endpoint.COURSES, params = {
             'institutionId':    institutionId,
             'academicYearId':   academicYearId,
             'listType':         listType.name,
@@ -47,7 +47,7 @@ class Request:
         return TypeAdapter(CourseList).validate_json(response)
     
     def institutions(self) -> list[Institution]:
-        response = self.scraper.get(Endpoint.INSTITUTIONS)
+        response = self.client.get(Endpoint.INSTITUTIONS)
         return TypeAdapter(list[Institution]).validate_json(response)
 
     def agreement(self, 
@@ -58,7 +58,7 @@ class Request:
                   filter:                   int | None = None
                   ) -> Result:
         
-        response = self.scraper.get(Endpoint.AGREEMENTS + \
+        response = self.client.get(Endpoint.AGREEMENTS + \
             f'?Key={academicYearId}/{receivingInstitutionId}/to/{sendingInstitutionId}/{agreement}{f'/{filter}' if filter else ''}'
         )
         data = json.loads(response)
@@ -71,7 +71,7 @@ class Request:
                    sendingInstitutionId: int
                    ) -> list[AgreementList]:
         
-        response = self.scraper.get(Endpoint.INSTITUTIONS + \
+        response = self.client.get(Endpoint.INSTITUTIONS + \
             f'/{sendingInstitutionId}/agreements'
         )
         return TypeAdapter(list[AgreementList]).validate_json(response)
@@ -80,7 +80,7 @@ class Request:
                          sendingInstitutionId: int
                          ) -> Availability:
         
-        response = self.scraper.get(Endpoint.INSTITUTIONS + \
+        response = self.client.get(Endpoint.INSTITUTIONS + \
             f'/{sendingInstitutionId}/transferability/availableAcademicYears'
         )
         return TypeAdapter(Availability).validate_json(response)
@@ -92,7 +92,7 @@ class Request:
                 categoryCode:               Reports.Type
                 ) -> Reports:
         
-        response = self.scraper.get(Endpoint.REPORTS, params = {
+        response = self.client.get(Endpoint.REPORTS, params = {
             'receivingInstitutionId':   receivingInstitutionId,
             'sendingInstitutionId':     sendingInstitutionId,
             'academicYearId':           academicYearId,
@@ -106,7 +106,7 @@ class Request:
                    academicYearId:          int
                    ) -> list[Categories]:
 
-        response = self.scraper.get(Endpoint.CATEGORIES, params = {
+        response = self.client.get(Endpoint.CATEGORIES, params = {
             'receivingInstitutionId':   receivingInstitutionId,
             'sendingInstitutionId':     sendingInstitutionId,
             'academicYearId':           academicYearId
@@ -114,7 +114,7 @@ class Request:
         return TypeAdapter(list[Categories]).validate_json(response)
 
     def years(self) -> list[Year]:
-        response = self.scraper.get(Endpoint.YEARS)
+        response = self.client.get(Endpoint.YEARS)
         return TypeAdapter(list[Year]).validate_json(response)
 
 # request = Request()

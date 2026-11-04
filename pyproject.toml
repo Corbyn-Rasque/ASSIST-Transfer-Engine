@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "assist-transfer-engine"
+version = "0.1.0"
+description = "Parses California community college transfer agreements from ASSIST.org into typed models"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2"]
+
+[project.optional-dependencies]
+web = ["curl_cffi"]
+database = ["sqlalchemy>=2", "psycopg2-binary", "python-dotenv"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["sources*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = ["ignore::DeprecationWarning"]

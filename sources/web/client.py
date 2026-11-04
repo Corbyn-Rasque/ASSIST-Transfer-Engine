@@ -15,7 +15,7 @@ class Time (IntEnum):
     REFRESH = 5
     BETWEEN = 2
 
-class Scraper:
+class Client:
     browser:    BrowserTypeLiteral
     session:    Session
     root:       str
@@ -80,7 +80,7 @@ class Scraper:
         return DATA / f'{hash}.json'
 
     def save(self, prepared: Request, retreived: Response):
-        DATA.mkdir(exist_ok=True)
+        DATA.mkdir(exist_ok = True)
         self.file(prepared).write_text(retreived.text)
 
     def retrieve(self, prepared: Request) -> str:

@@ -38,7 +38,7 @@ class _Transferability:
         CSUGE   = 'CSUGE'
         CSUAI   = 'CSUAI'
         IGETC   = 'IGETC'
-        CALGETC = 'CALGETC' # Added per web scraper
+        CALGETC = 'CALGETC' # Added per website data
 
 class _Asset (Models):
     class Models: pass
@@ -191,7 +191,7 @@ class _Section (_Item.Model, _Item.Models):
             CSUGE               = 'CSUGE'
             CSUAI               = 'CSUAI'
             IGETC               = 'IGETC'
-            CALGETC             = 'CALGETC' # Added per web scraper
+            CALGETC             = 'CALGETC' # Added per website data
 
     class Course (Cell.Model, Cell.Models):
         '''
@@ -289,7 +289,7 @@ class _Section (_Item.Model, _Item.Models):
 
     class CALGETC (Cell.Model, Cell.Models):
         '''
-        This type of cell is a `CALGETC`. This model extends [Template Group Section Cell][Template Group Section Cell]. Not yet in the API documentation; added per web scraper.
+        This type of cell is a `CALGETC`. This model extends [Template Group Section Cell][Template Group Section Cell]. Not yet in the API documentation; added per website data.
 
         :calgetc:   The Cal-GETC transferability model
         :​type:      `Group.Section.Cell.Type.CALGETC`
