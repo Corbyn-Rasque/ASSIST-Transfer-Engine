@@ -1,0 +1,117 @@
+{
+    "noArticulationReason": null,
+    "deniedCourses": [],
+    "items": [
+        {
+            "courseConjunction": "And",
+            "items": [
+                {
+                    "visibleCrossListedCourses": [],
+                    "requisites": [],
+                    "attributes": [],
+                    "courseIdentifierParentId": 308065,
+                    "courseTitle": "Beginning French II",
+                    "courseNumber": "2",
+                    "prefix": "FR",
+                    "prefixParentId": 6845,
+                    "prefixDescription": "French",
+                    "departmentParentId": 5904,
+                    "department": "French",
+                    "begin": "F1995",
+                    "end": "",
+                    "minUnits": 5.0,
+                    "maxUnits": 5.0,
+                    "pathways": [],
+                    "publishedCourseIdentifierYearTermId": null,
+                    "position": 1,
+                    "type": "Course"
+                },
+                {
+                    "visibleCrossListedCourses": [],
+                    "requisites": [],
+                    "attributes": [],
+                    "courseIdentifierParentId": 360050,
+                    "courseTitle": "Beginning French I Honors",
+                    "courseNumber": "1H",
+                    "prefix": "FR",
+                    "prefixParentId": 6845,
+                    "prefixDescription": "French",
+                    "departmentParentId": 5904,
+                    "department": "French",
+                    "begin": "F2014",
+                    "end": "",
+                    "minUnits": 5.0,
+                    "maxUnits": 5.0,
+                    "pathways": [],
+                    "publishedCourseIdentifierYearTermId": null,
+                    "position": 0,
+                    "type": "Course"
+                }
+            ],
+            "attributes": [],
+            "position": 1,
+            "type": "CourseGroup"
+        },
+        {
+            "courseConjunction": "And",
+            "items": [
+                {
+                    "visibleCrossListedCourses": [],
+                    "requisites": [],
+                    "attributes": [],
+                    "courseIdentifierParentId": 308065,
+                    "courseTitle": "Beginning French II",
+                    "courseNumber": "2",
+                    "prefix": "FR",
+                    "prefixParentId": 6845,
+                    "prefixDescription": "French",
+                    "departmentParentId": 5904,
+                    "department": "French",
+                    "begin": "F1995",
+                    "end": "",
+                    "minUnits": 5.0,
+                    "maxUnits": 5.0,
+                    "pathways": [],
+                    "publishedCourseIdentifierYearTermId": null,
+                    "position": 1,
+                    "type": "Course"
+                },
+                {
+                    "visibleCrossListedCourses": [],
+                    "requisites": [],
+                    "attributes": [],
+                    "courseIdentifierParentId": 307844,
+                    "courseTitle": "Beginning French I",
+                    "courseNumber": "1",
+                    "prefix": "FR",
+                    "prefixParentId": 6845,
+                    "prefixDescription": "French",
+                    "departmentParentId": 5904,
+                    "department": "French",
+                    "begin": "F1995",
+                    "end": "",
+                    "minUnits": 5.0,
+                    "maxUnits": 5.0,
+                    "pathways": [],
+                    "publishedCourseIdentifierYearTermId": null,
+                    "position": 0,
+                    "type": "Course"
+                }
+            ],
+            "attributes": [],
+            "position": 0,
+            "type": "CourseGroup"
+        }
+    ],
+    "courseGroupConjunctions": [
+        {
+            "id": "017d20ec-bbc2-4086-90bc-08ddf49accf2",
+            "sendingArticulationId": "2468a161-edf3-44ba-97eb-08ddf49acc21",
+            "groupConjunction": "Or",
+            "sendingCourseGroupBeginPosition": 0,
+            "sendingCourseGroupEndPosition": 1
+        }
+    ],
+    "type": "SendingArticulation",
+    "attributes": []
+}

@@ -1,0 +1,123 @@
+{
+    "type": "RequirementGroup",
+    "hideSectionLetters": false,
+    "sections": [
+        {
+            "type": "Section",
+            "rows": [
+                {
+                    "position": 0,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 331022,
+                                "courseTitle": "Principles of Physics",
+                                "courseNumber": "196",
+                                "prefix": "PHYS",
+                                "prefixParentId": 205,
+                                "prefixDescription": "Physics",
+                                "departmentParentId": 10763,
+                                "department": "Physics",
+                                "begin": "F1994",
+                                "end": "",
+                                "minUnits": 3.0,
+                                "maxUnits": 3.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [],
+                            "id": "a3d031e1-7bf9-4168-1454-08ddd3b241bf",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                }
+            ],
+            "advisements": [],
+            "position": 0,
+            "attributes": []
+        },
+        {
+            "type": "Section",
+            "rows": [
+                {
+                    "position": 0,
+                    "cells": [
+                        {
+                            "type": "Series",
+                            "series": {
+                                "conjunction": "And",
+                                "name": "PHYS 196, PHYS 196L",
+                                "courses": [
+                                    {
+                                        "id": "68b825cc-57ff-4b65-dd19-08ddd3b23ad5",
+                                        "position": 0,
+                                        "courseIdentifierParentId": 331022,
+                                        "courseTitle": "Principles of Physics",
+                                        "courseNumber": "196",
+                                        "prefix": "PHYS",
+                                        "prefixParentId": 205,
+                                        "prefixDescription": "Physics",
+                                        "departmentParentId": 10763,
+                                        "department": "Physics",
+                                        "begin": "F1994",
+                                        "end": "",
+                                        "minUnits": 3.0,
+                                        "maxUnits": 3.0,
+                                        "pathways": []
+                                    },
+                                    {
+                                        "id": "056c2f3b-1c9c-4b59-dd1a-08ddd3b23ad5",
+                                        "position": 1,
+                                        "courseIdentifierParentId": 44065,
+                                        "courseTitle": "Principles of Physics Laboratory",
+                                        "courseNumber": "196L",
+                                        "prefix": "PHYS",
+                                        "prefixParentId": 205,
+                                        "prefixDescription": "Physics",
+                                        "departmentParentId": 10763,
+                                        "department": "Physics",
+                                        "begin": "F1998",
+                                        "end": "",
+                                        "minUnits": 1.0,
+                                        "maxUnits": 1.0,
+                                        "pathways": []
+                                    }
+                                ],
+                                "seriesPathways": []
+                            },
+                            "requisites": [],
+                            "visibleCrossListedCourses": [],
+                            "seriesAttributes": [],
+                            "courseAttributes": [],
+                            "id": "8e0e1127-927f-4346-1455-08ddd3b241bf",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                }
+            ],
+            "advisements": [],
+            "position": 1,
+            "attributes": []
+        }
+    ],
+    "attributes": [],
+    "showConjunctionBetweenSections": false,
+    "academicYearId": 0,
+    "institutionParentId": 0,
+    "instruction": {
+        "type": "Conjunction",
+        "conjunction": "Or",
+        "id": "22983d02-8b2e-433e-a212-08ddd3b241b0",
+        "selectionType": "Complete"
+    },
+    "advisements": [],
+    "groupId": "44eb0526-081d-4aaf-9e4d-019784502942",
+    "position": 6,
+    "area": "Requirements"
+}

@@ -1,0 +1,44 @@
+{
+    "type": "RequirementGroup",
+    "hideSectionLetters": false,
+    "sections": [
+        {
+            "type": "Section",
+            "rows": [
+                {
+                    "position": 0,
+                    "cells": [
+                        {
+                            "type": "Requirement",
+                            "requirement": {
+                                "name": "Foreign Language Requirement"
+                            },
+                            "requirementAttributes": [
+                                {
+                                    "position": 0,
+                                    "content": "Courses must be in the same language"
+                                }
+                            ],
+                            "id": "108f9b1d-26dd-4e6f-837f-2f4f4bd1c676",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                }
+            ],
+            "advisements": [],
+            "position": 0,
+            "attributes": []
+        }
+    ],
+    "attributes": [],
+    "showConjunctionBetweenSections": false,
+    "academicYearId": 0,
+    "institutionParentId": 0,
+    "instruction": null,
+    "advisements": [],
+    "groupId": "00000000-0000-0000-0000-000000000000",
+    "position": 5,
+    "area": "Requirements"
+}

@@ -1,0 +1,410 @@
+{
+    "type": "RequirementGroup",
+    "hideSectionLetters": false,
+    "sections": [
+        {
+            "type": "SectionHeader",
+            "content": "GENERAL EDUCATION FOUNDATION ORAL COMMUNICATION",
+            "position": 0,
+            "attributes": []
+        },
+        {
+            "type": "Section",
+            "rows": [
+                {
+                    "position": 0,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 134471,
+                                "courseTitle": "Fundamentals of Public Communication",
+                                "courseNumber": "3",
+                                "prefix": "COMM",
+                                "prefixParentId": 12230,
+                                "prefixDescription": "Communication",
+                                "departmentParentId": 2770,
+                                "department": "Communication",
+                                "begin": "F1999",
+                                "end": "",
+                                "minUnits": 3.0,
+                                "maxUnits": 3.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [],
+                            "id": "257ca284-8be2-4a8e-68be-08dd8f615b1f",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                },
+                {
+                    "position": 1,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 134455,
+                                "courseTitle": "Persuasion",
+                                "courseNumber": "7",
+                                "prefix": "COMM",
+                                "prefixParentId": 12230,
+                                "prefixDescription": "Communication",
+                                "departmentParentId": 2770,
+                                "department": "Communication",
+                                "begin": "F1999",
+                                "end": "",
+                                "minUnits": 3.0,
+                                "maxUnits": 3.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [],
+                            "id": "e74b048b-3589-4ea4-68bf-08dd8f615b1f",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                },
+                {
+                    "position": 2,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 222408,
+                                "courseTitle": "Group Discussion",
+                                "courseNumber": "8",
+                                "prefix": "COMM",
+                                "prefixParentId": 12230,
+                                "prefixDescription": "Communication",
+                                "departmentParentId": 2770,
+                                "department": "Communication",
+                                "begin": "F1999",
+                                "end": "",
+                                "minUnits": 3.0,
+                                "maxUnits": 3.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [],
+                            "id": "f5ab0d5c-91e7-4255-68c0-08dd8f615b1f",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                },
+                {
+                    "position": 3,
+                    "cells": [
+                        {
+                            "type": "CALGETC",
+                            "calgetc": {
+                                "areaType": "CALGETC",
+                                "name": "Oral Communication",
+                                "code": "1C"
+                            },
+                            "id": "a6409548-26af-43f9-d3af-08ddfd11e1de",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                }
+            ],
+            "advisements": [
+                {
+                    "type": "NFollowing",
+                    "amount": 1.0,
+                    "amountUnitType": "Course",
+                    "position": 0,
+                    "selectionType": "Select"
+                }
+            ],
+            "position": 1,
+            "attributes": []
+        },
+        {
+            "type": "SectionHeader",
+            "content": "GENERAL EDUCATION FOUNDATION WRITTEN COMMUNICATION",
+            "position": 2,
+            "attributes": []
+        },
+        {
+            "type": "Section",
+            "rows": [
+                {
+                    "position": 0,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 211671,
+                                "courseTitle": "Accelerated Academic Literacy",
+                                "courseNumber": "10",
+                                "prefix": "ENGL",
+                                "prefixParentId": 2651,
+                                "prefixDescription": "English",
+                                "departmentParentId": 4971,
+                                "department": "English",
+                                "begin": "F2006",
+                                "end": "",
+                                "minUnits": 3.0,
+                                "maxUnits": 3.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [],
+                            "id": "6e69065f-4045-4e3f-68c2-08dd8f615b1f",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                }
+            ],
+            "advisements": [],
+            "position": 3,
+            "attributes": []
+        },
+        {
+            "type": "SectionHeader",
+            "content": "GENERAL EDUCATION FOUNDATION CRITICAL THINKING",
+            "position": 4,
+            "attributes": []
+        },
+        {
+            "type": "Section",
+            "rows": [
+                {
+                    "position": 0,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 160557,
+                                "courseTitle": "Critical Thinking about Society",
+                                "courseNumber": "3",
+                                "prefix": "SOC",
+                                "prefixParentId": 9003,
+                                "prefixDescription": "Sociology",
+                                "departmentParentId": 12051,
+                                "department": "Sociology",
+                                "begin": "F2002",
+                                "end": "",
+                                "minUnits": 3.0,
+                                "maxUnits": 3.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [
+                                {
+                                    "position": 0,
+                                    "content": "Preferred course"
+                                }
+                            ],
+                            "id": "52219642-3d1b-4807-68c3-08dd8f615b1f",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                },
+                {
+                    "position": 1,
+                    "cells": [
+                        {
+                            "type": "CALGETC",
+                            "calgetc": {
+                                "areaType": "CALGETC",
+                                "name": "Critical Thinking and Composition",
+                                "code": "1B"
+                            },
+                            "id": "b0426e3f-59c8-49e0-d3b0-08ddfd11e1de",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                }
+            ],
+            "advisements": [
+                {
+                    "type": "NFollowing",
+                    "amount": 1.0,
+                    "amountUnitType": "Course",
+                    "position": 0,
+                    "selectionType": "Select"
+                }
+            ],
+            "position": 5,
+            "attributes": []
+        },
+        {
+            "type": "SectionHeader",
+            "content": "GENERAL EDUCATION FOUNDATION QUANTITATIVE REASONING",
+            "position": 6,
+            "attributes": []
+        },
+        {
+            "type": "Section",
+            "rows": [
+                {
+                    "position": 0,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 155272,
+                                "courseTitle": "Elementary Statistics",
+                                "courseNumber": "11",
+                                "prefix": "MATH",
+                                "prefixParentId": 9935,
+                                "prefixDescription": "Mathematics",
+                                "departmentParentId": 8970,
+                                "department": "Mathematics",
+                                "begin": "F1999",
+                                "end": "",
+                                "minUnits": 3.0,
+                                "maxUnits": 3.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [],
+                            "id": "ac83a9f3-336f-414b-68c5-08dd8f615b1f",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                },
+                {
+                    "position": 1,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 158228,
+                                "courseTitle": "Public Health Statistics",
+                                "courseNumber": "92",
+                                "prefix": "PH",
+                                "prefixParentId": 7472,
+                                "prefixDescription": "Public Health",
+                                "departmentParentId": 11344,
+                                "department": "Public Health",
+                                "begin": "F2010",
+                                "end": "",
+                                "minUnits": 3.0,
+                                "maxUnits": 3.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [],
+                            "id": "d1430b38-1e8d-4b1f-68c6-08dd8f615b1f",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                },
+                {
+                    "position": 2,
+                    "cells": [
+                        {
+                            "type": "CALGETC",
+                            "calgetc": {
+                                "areaType": "CALGETC",
+                                "name": "Mathematical Concepts and Quantitative Reasoning",
+                                "code": "2"
+                            },
+                            "id": "4d17d127-d740-4c1e-d3b1-08ddfd11e1de",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                }
+            ],
+            "advisements": [
+                {
+                    "type": "NFollowing",
+                    "amount": 1.0,
+                    "amountUnitType": "Course",
+                    "position": 0,
+                    "selectionType": "Select"
+                }
+            ],
+            "position": 7,
+            "attributes": []
+        },
+        {
+            "type": "SectionHeader",
+            "content": "GENERAL EDUCATION BREADTH PHYSICAL SCIENCES",
+            "position": 8,
+            "attributes": []
+        },
+        {
+            "type": "Section",
+            "rows": [
+                {
+                    "position": 0,
+                    "cells": [
+                        {
+                            "type": "Course",
+                            "course": {
+                                "courseIdentifierParentId": 134008,
+                                "courseTitle": "Introductory General Chemistry",
+                                "courseNumber": "3A",
+                                "prefix": "CHEM",
+                                "prefixParentId": 3769,
+                                "prefixDescription": "Chemistry",
+                                "departmentParentId": 2289,
+                                "department": "Chemistry",
+                                "begin": "F1999",
+                                "end": "",
+                                "minUnits": 4.0,
+                                "maxUnits": 4.0,
+                                "pathways": []
+                            },
+                            "visibleCrossListedCourses": [],
+                            "requisites": [],
+                            "courseAttributes": [],
+                            "id": "9bbd71e2-5094-4e77-ecb5-08ddc540d620",
+                            "position": 0,
+                            "attributes": []
+                        }
+                    ],
+                    "attributes": []
+                }
+            ],
+            "advisements": [],
+            "position": 9,
+            "attributes": []
+        }
+    ],
+    "attributes": [],
+    "showConjunctionBetweenSections": false,
+    "academicYearId": 0,
+    "institutionParentId": 0,
+    "instruction": {
+        "type": "Conjunction",
+        "conjunction": "And",
+        "id": "c51131ce-f5d6-4f56-f984-08dd8f6161cf",
+        "selectionType": "Complete"
+    },
+    "advisements": [],
+    "groupId": "2db86845-6887-ef11-8474-000d3a37e3b6",
+    "position": 1,
+    "area": "Requirements"
+}
