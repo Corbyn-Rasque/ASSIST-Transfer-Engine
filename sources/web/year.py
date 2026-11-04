@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 
-class AcademicYear (BaseModel):
+class Term (BaseModel):
     id:                         int
     code:                       str
     beginDate:                  datetime
@@ -10,3 +10,7 @@ class AcademicYear (BaseModel):
     isOpenForMaintenance:       Optional[bool] = None
     isOpenForPublic:            Optional[bool] = None
     isOpenForReporting:         Optional[bool] = None
+
+class Year (BaseModel):
+    Id:                         int
+    FallYear:                   int

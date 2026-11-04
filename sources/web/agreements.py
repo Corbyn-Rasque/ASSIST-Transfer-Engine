@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 from sources.web.institution            import Institution
-from sources.web.year                   import AcademicYear
+from sources.web.year                   import Term
 
 from sources.api.agreement.asset        import Asset, PublishedAgreement
 from sources.api.agreement.receiving    import ReceivingArticulation
@@ -13,7 +13,7 @@ from sources.api.agreement.receiving    import ReceivingArticulation
 from sources.api.types import Polymorphic
 from pydantic import ConfigDict
 
-Polymorphic.model_config = ConfigDict(extra='ignore')
+Polymorphic.model_config = ConfigDict(extra = 'ignore')
 
 class Availability (BaseModel):
     uctca:      list[int]
@@ -40,9 +40,14 @@ class List (BaseModel):
     sendingYearIds:         list[int]
     receivingYearIds:       list[int]
 
-class Department(BaseModel):
+class Department (BaseModel):
     name: str
     articulations: list[ReceivingArticulation.Models]
+
+class ArticulationCell (BaseModel):
+    templateCellId:      str
+    articulation:        ReceivingArticulation.Models
+    receivingAttributes: ReceivingArticulation.Models | None = None
 
 class Agreement (BaseModel):
     class Type (StrEnum):
@@ -64,9 +69,9 @@ class Agreement (BaseModel):
     publishDate:            datetime
     receivingInstitution:   Institution
     sendingInstitution:     Institution
-    academicYear:           AcademicYear
+    academicYear:           Term
     templateAssets:         list[Union[PublishedAgreement.Model, Asset.Models]] | None = None
-    articulations:          list[Union[Department, ReceivingArticulation.Models]] | None = None
+    articulations:          list[Union[Department, ArticulationCell]] | None = None
 
     @field_validator('receivingInstitution', 'sendingInstitution', 
                      'academicYear', 'templateAssets', 'articulations',

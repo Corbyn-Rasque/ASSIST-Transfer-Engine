@@ -1,8 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 from datetime import datetime
 from enum import IntEnum
 
-from sources.web.year import AcademicYear
+from sources.web.year import Term
+from sources.api.course import Course as ApiCourse
 
 class Area (BaseModel):
     areaType:                   int
@@ -24,27 +25,52 @@ class Notation (BaseModel):
     eventTerm:                  str
     positionNumber:             int
 
-class Course (BaseModel):
-    footnoteParentIds:          list
-    prefixParentId:             int
-    prefixCode:                 str
-    prefixDescription:          str
-    departmentName:             str
-    courseIdentifierParentId:   int
-    courseNumber:               str
-    courseTitle:                str
-    courseParentId:             int
-    isCsuTransferable:          bool
-    minUnits:                   float
-    maxUnits:                   float
-    beginDate:                  datetime
-    beginTermCode:              str
-    endDate:                    datetime
-    endTermCode:                str
-    transferAreas:              list[Area]
-    isRepeatable:               bool
-    identifier:                 str
-    notations:                  list
+# class Course (BaseModel):
+#     footnoteParentIds:          list
+#     prefixParentId:             int
+#     prefixCode:                 str
+#     prefixDescription:          str
+#     departmentName:             str
+#     courseIdentifierParentId:   int
+#     courseNumber:               str
+#     courseTitle:                str
+#     courseParentId:             int
+#     isCsuTransferable:          bool
+#     minUnits:                   float
+#     maxUnits:                   float
+#     beginDate:                  datetime
+#     beginTermCode:              str
+#     endDate:                    datetime
+#     endTermCode:                str
+#     transferAreas:              list[Area]
+#     isRepeatable:               bool
+#     identifier:                 str
+#     notations:                  list
+
+class Course(ApiCourse.Model):
+    # Fields missing from scraper data
+    departmentParentId: int | None  = None  # type: ignore[assignment]
+    department:         str | None  = None  # type: ignore[assignment]
+
+    # Scraper-only fields
+    footnoteParentIds:  list        = []
+    isRepeatable:       bool        = False
+    identifier:         str         = ""
+    notations:          list        = []
+    transferAreas:      list[Area]  = []
+
+    @model_validator(mode = 'before')
+    @classmethod
+    def normalize(cls, data: dict) -> dict:
+        renames = {
+            'prefixCode':    'prefix',
+            'beginTermCode': 'begin',
+            'endTermCode':   'end',
+        }
+        for old, new in renames.items():
+            if old in data:
+                data[new] = data.pop(old)
+        return data
 
 class List (BaseModel):
     class Type (IntEnum):
@@ -59,5 +85,5 @@ class List (BaseModel):
 
     listType:                   Type
     institutionName:            str
-    academicYear:               AcademicYear
+    academicYear:               Term
     courseInformationList:      list[Course]
