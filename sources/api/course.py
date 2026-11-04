@@ -56,8 +56,6 @@ class Course:
         end:                        str
         endDate:                    datetime | None     = None
         endTermId:                  int | None          = None
-        # endDate:                    Optional[datetime]  = Field(default = None)
-        # endTermId:                  Optional[int]       = Field(default = None)
         minUnits:                   float
         maxUnits:                   float
         isTerminated:               bool | None         = None
@@ -95,13 +93,13 @@ class Denied:
         '''
         The Denied Course Model represents courses on a sending articulation that have been explicitly denied. This model extends [Course][Course].
 
-        :denied:        The date the course is denied on attributes
+        :deniedOn:      The date the course was denied on, if ASSIST provides one
         :attributes:    The attributes associated to the denied course
 
         [Course]: https://prod.assistng.org/apidocs/docs/courses/get#course-model
         [Documentation](https://prod.assistng.org/apidocs/docs/courses/get#denied-course-model)
         '''
-        deniedOn:                   datetime
+        deniedOn:                   datetime | None = None
         attributes:                 list[Attribute.Model]
 
 class Requisite:
@@ -151,12 +149,12 @@ class Pathway:
         expectationId:              int
         expectationName:            str
         subexpectationId:           int
-        subexpectationName:         str
-        begin:                      str
-        beginDate:                  datetime
-        beginTermId:                int
-        end:                        str
-        endDate:                    Optional[datetime]
-        endTermId:                  Optional[int]
+        subexpectationName:         str | None                  = None
+        begin:                      str | None                  = None
+        beginDate:                  datetime | None             = None
+        beginTermId:                int | None                  = None
+        end:                        str | None                  = None
+        endDate:                    Optional[datetime] | None   = None
+        endTermId:                  Optional[int] | None        = None
 
 Course.Model.model_rebuild()

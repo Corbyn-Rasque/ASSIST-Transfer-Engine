@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from enum import IntEnum
 from typing import Optional
-from pydantic import Field, BaseModel
+from pydantic import Field, BaseModel, field_validator
 
 from sources.api.types import Monomorphic
 
@@ -30,6 +30,17 @@ class Institution:
         termType:               Institution.TermType
         beginId:                int
         termTypeAcademicYears:  list[Institution.Term]
+
+        @field_validator('category', 'termType', mode = 'before')
+        @classmethod
+        def coerce_enum(cls, v):
+            if isinstance(v, str):
+                mapping = {
+                    'CSU': 0, 'UC': 1, 'CCC': 2, 'AICCU': 5,
+                    'Semester': 0, 'Quarter': 1, 'Trimester': 2,
+                }
+                return mapping[v]
+            return v
     
     class Types (IntEnum):
         '''
@@ -62,3 +73,10 @@ class Institution:
 
     class Term (History):
         termType:       Institution.TermType
+
+        @field_validator('termType', mode = 'before')
+        @classmethod
+        def coerce_enum(cls, v):
+            if isinstance(v, str):
+                return {'Semester': 0, 'Quarter': 1, 'Trimester': 2}[v]
+            return v

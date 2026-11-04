@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from enum       import StrEnum
-from typing     import Literal
+from typing     import Literal, TypeAlias
 
 from sources.api.agreement.attribute        import Attribute
 from sources.api.course                     import Course as BaseCourse
@@ -13,6 +13,8 @@ from sources.api.agreement.sending          import SendingArticulation, SendingT
 from sources.api.types import Polymorphic, Models
 
 class ReceivingArticulation (Models):
+    class Models: pass
+
     class Model (Polymorphic):
         '''
         The base articulation model represents the articulation details from which articulation types are derived.
@@ -38,7 +40,7 @@ class ReceivingArticulation (Models):
         GeneralEducation    = 'GeneralEducation'
         Transferability     = 'Transferability'
 
-class Course (ReceivingArticulation.Model):
+class Course (ReceivingArticulation.Model, ReceivingArticulation.Models):
     '''
     The receiving articulation is a single course. This model extends [Base Articulation][Base Articulation].
 
@@ -50,12 +52,12 @@ class Course (ReceivingArticulation.Model):
     [Base Articulation]: https://prod.assistng.org/apidocs/docs/articulation/model/receiving#base-articulation-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/receiving#course-articulation)
     '''
-    type:                       Literal[ReceivingArticulation.Type.Course]
-    course:                     BaseCourse.Model
+    type:                       Literal[ReceivingArticulation.Type.Course] # type: ignore[assignment]
+    course:                     BaseCourse.Model | None = None
     visibleCrossListedCourses:  list[BaseCourse.Model] | None = None
     courseAttributes:           list[Attribute.Model] | None = None
 
-class Series (ReceivingArticulation.Model):
+class Series (ReceivingArticulation.Model, ReceivingArticulation.Models):
     '''
     The receiving articulation is a series of courses. This model extends [Base Articulation][Base Articulation].
 
@@ -68,13 +70,13 @@ class Series (ReceivingArticulation.Model):
     [Base Articulation]: https://prod.assistng.org/apidocs/docs/articulation/model/receiving#base-articulation-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/receiving#series-articulation)
     '''
-    type:                       Literal[ReceivingArticulation.Type.Series]
-    series:                     BaseSeries.Model
+    type:                       Literal[ReceivingArticulation.Type.Series] # type: ignore[assignment]
+    series:                     BaseSeries.Model  | None = None
     visibleCrossListedCourses:  list[BaseSeries.Crosslisted.Model] | None = None
     courseAttributes:           list[BaseSeries.Attribute.Model] | None = None
     seriesAttributes:           list[Attribute.Model] | None = None
 
-class Requirement (ReceivingArticulation.Model):
+class Requirement (ReceivingArticulation.Model, ReceivingArticulation.Models):
     '''
     The receiving articulation is a campus requirement. This model extends [Base Articulation][Base Articulation].
 
@@ -85,11 +87,11 @@ class Requirement (ReceivingArticulation.Model):
     [Base Articulation]: https://prod.assistng.org/apidocs/docs/articulation/model/receiving#base-articulation-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/receiving#requirement-articulation)
     '''
-    type:                   Literal[ReceivingArticulation.Type.Requirement]
-    requirement:            BaseRequirement.Model
+    type:                   Literal[ReceivingArticulation.Type.Requirement] # type: ignore[assignment]
+    requirement:            BaseRequirement.Model | None = None
     requirementAttributes:  list[Attribute.Model]
 
-class GeneralEducation (ReceivingArticulation.Model):
+class GeneralEducation (ReceivingArticulation.Model, ReceivingArticulation.Models):
     '''
     The receiving articulation is a Campus-based GE. This model extends [Base Articulation][Base Articulation].
 
@@ -100,11 +102,11 @@ class GeneralEducation (ReceivingArticulation.Model):
     [Base Articulation]: https://prod.assistng.org/apidocs/docs/articulation/model/receiving#base-articulation-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/receiving#generaleducation-articulation)
     '''
-    type:                           Literal[ReceivingArticulation.Type.GeneralEducation]
-    generalEducationArea:           BaseGeneralEducation.Model
+    type:                           Literal[ReceivingArticulation.Type.GeneralEducation] # type: ignore[assignment]
+    generalEducationArea:           BaseGeneralEducation.Model | None = None
     generalEducationAreaAttributes: list[Attribute.Model]
 
-class Transferability (ReceivingArticulation.Model):
+class Transferability (ReceivingArticulation.Model, ReceivingArticulation.Models):
     '''
     The receiving articulation is a transferability area (CSUGE, CSUAI, or IGETC). This model extends [Base Articulation][Base Articulation]. This type of articulation has no additional fields and can only be added as a template asset for Major and General Education agreements.
 
@@ -113,6 +115,6 @@ class Transferability (ReceivingArticulation.Model):
     [Base Articulation]: https://prod.assistng.org/apidocs/docs/articulation/model/receiving#base-articulation-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/receiving#transferability-articulation)
     '''
-    type:   Literal[ReceivingArticulation.Type.Transferability]
+    type:   Literal[ReceivingArticulation.Type.Transferability] # type: ignore[assignment]
 
-ReceivingArticulation.Models = ReceivingArticulation.annotated()
+ReceivingArticulation.Models = ReceivingArticulation.annotated() # type: ignore[assignment]

@@ -2,15 +2,16 @@ from __future__ import annotations
 
 from uuid import UUID
 from enum import StrEnum
-from typing import Literal, Optional, TypeAlias
+from typing import TYPE_CHECKING, ClassVar, Literal, Optional, TypeAlias
 
 from sources.api.agreement.attribute    import Attribute as BaseAttribute
 from sources.api.agreement.advisement   import Advisement as BaseAdvisement
-from sources.api.course                 import Course as BaseCourse, Denied as BaseDenied, Requisite as BaseRequisite
+from sources.api.course                 import Course as BaseCourse, Denied as BaseDenied, Requisite as BaseRequisite, Pathway as BasePathway
 
 from sources.api.types                  import Monomorphic, Polymorphic, Models
 
 class _Item (Models):
+    class Models: pass
     class Model (Polymorphic):
         '''
         The base sending articulation model contains fields that are common to all sending articulation items.
@@ -32,7 +33,7 @@ class _Item (Models):
         CourseGroup = 'CourseGroup'
         Advisement  = 'Advisement'
 
-class _CourseGroup (_Item.Model):
+class _CourseGroup (_Item.Model, _Item.Models):
     '''
     This model extends the [Sending Articulation Item][Sending Articulation Item] if the sending articulation type is a `CourseGroup`.
 
@@ -42,9 +43,12 @@ class _CourseGroup (_Item.Model):
     [Sending Articulation Item]: https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-item-base-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-course-group)
     '''
-    type:               Literal[_Item.Type.CourseGroup]
+    type:               Literal[_Item.Type.CourseGroup] # type: ignore[assignment]
     courseConjunction:  _CourseGroup.Conjunction.Type
-    items:              list[_CourseGroup.Item.Model]
+    items:              list[_CourseGroupItems] # Course | Advisement, resolved below once both are defined
+
+    Course:             ClassVar[type[_CourseGroupCourse]]
+    Advisement:         ClassVar[type[_CourseGroupAdvisement]]
 
     class Conjunction:
         class Model (Monomorphic):
@@ -75,6 +79,8 @@ class _CourseGroup (_Item.Model):
             Or  = 'Or'
 
     class Item (Models):
+        class Models: pass
+
         class Model (Polymorphic):
             '''
             The model that represents a sending articulation item in a course group. This model is the base model in which other Course Group Items are derived.
@@ -96,7 +102,7 @@ class _CourseGroup (_Item.Model):
             Course      = 'Course'
             Advisement  = 'Advisement'
 
-class _CourseGroupCourse (_CourseGroup.Item.Model):
+class _CourseGroupCourse (_CourseGroup.Item.Model, _CourseGroup.Item.Models):
     '''
     The model that represents a sending course item in a course group. This model extends [Sending Articulation Course Group Item Base Model][Sending Articulation Course Group Item Base Model] and is the model used when the group item type is `Course`.
 
@@ -116,30 +122,32 @@ class _CourseGroupCourse (_CourseGroup.Item.Model):
     :minUnits:                              The minimum units
     :maxUnits:                              The maximum units
     :publishedCourseIdentifierYearTermId:   The yearTermId that this course version applies to, usually `None` when there's not a midyear revision for the course
+    :pathways:                              The pathways associated with this course
     :​type:                                  `SendingArticulation.CourseGroup.Item.Type.Course`
 
     [Sending Articulation Course Group Item Base Model]: https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-course-group-item-base-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-course-group-item-course)
     '''
-    type:                                   Literal[_CourseGroup.Item.Type.Course]
-    visibleCrossListedCourses:              list[BaseCourse.Model]
-    requisites:                             list[BaseRequisite.Model]
-    attributes:                             list[BaseAttribute.Model]
+    type:                                   Literal[_CourseGroup.Item.Type.Course] # type: ignore[assignment]
+    visibleCrossListedCourses:              list[BaseCourse.Model]      | None = None
+    requisites:                             list[BaseRequisite.Model]   | None = None
+    attributes:                             list[BaseAttribute.Model]   | None = None
     courseIdentifierParentId:               int
     courseTitle:                            str
-    courseNumber:                           int
+    courseNumber:                           str
     prefix:                                 str
     prefixParentId:                         int
     prefixDescription:                      str
     departmentParentId:                     int
     department:                             str
     begin:                                  str
-    end:                                    Optional[str]
-    minUnits:                               int
-    maxUnits:                               int
-    publishedCourseIdentifierYearTermId:    int
+    end:                                    Optional[str]               = None
+    minUnits:                               float
+    maxUnits:                               float
+    publishedCourseIdentifierYearTermId:    Optional[int]               = None
+    pathways:                               list[BasePathway.Model]     | None = None # Added per web scraper
 
-class _CourseGroupAdvisement (_CourseGroup.Item.Model):
+class _CourseGroupAdvisement (_CourseGroup.Item.Model, _CourseGroup.Item.Models):
     '''
     The model that represents a sending advisement in a course group. This model extends [Sending Articulation Course Group Item Base Model][Sending Articulation Course Group Item Base Model] and is the model used when the course group item type is an `Advisement`.
 
@@ -149,10 +157,8 @@ class _CourseGroupAdvisement (_CourseGroup.Item.Model):
     [Sending Articulation Course Group Item Base Model]: https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-course-group-item-base-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-course-group-item-advisement)
     '''
-    type:       Literal[_CourseGroup.Item.Type.Advisement]
+    type:       Literal[_CourseGroup.Item.Type.Advisement] # type: ignore[assignment]
     advisement: BaseAdvisement.Models
-
-_Item.Models = _Item.annotated()
 
 class _SendingArticulation:
     class Model (Monomorphic):
@@ -169,11 +175,11 @@ class _SendingArticulation:
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-model)
         '''
         noArticulationReason:       Optional[str]
-        deniedCourses:              list[BaseDenied.Model]
-        items:                      list[_Item.Models]
-        courseGroupConjunctions:    list[_CourseGroup.Conjunction.Model]
+        deniedCourses:              list[BaseDenied.Model]  | None = None
+        items:                      list[_SendingItems] | None = None # CourseGroup | Advisement, resolved below once both are defined
+        courseGroupConjunctions:    list[_CourseGroup.Conjunction.Model] | None = None
         type:                       _SendingArticulation.Type
-        attributes:                 list[BaseAttribute.Model]
+        attributes:                 list[BaseAttribute.Model] | None = None
 
     class Type (StrEnum):
         '''
@@ -195,7 +201,7 @@ class _SendingArticulation:
         [Sending Articulation Item]: https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-item-base-model
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/sending#sending-articulation-advisement-item)
         '''
-        type:       Literal[_Item.Type.Advisement]
+        type:       Literal[_Item.Type.Advisement] # type: ignore[assignment]
         advisement: BaseAdvisement.Models
 
 class SendingTemplateArticulation:
@@ -221,10 +227,20 @@ class SendingArticulation (_SendingArticulation):
     Item: TypeAlias         = _Item
     CourseGroup: TypeAlias  = _CourseGroup
 
-SendingArticulation.CourseGroup.Item.Models = _CourseGroup.Item.annotated()
+SendingArticulation.CourseGroup.Item.Models = _CourseGroup.Item.annotated() # type: ignore[assignment]
+
+if TYPE_CHECKING:
+    _CourseGroupItems: TypeAlias = _CourseGroupCourse | _CourseGroupAdvisement
+else:
+    _CourseGroupItems = SendingArticulation.CourseGroup.Item.Models
+_CourseGroup.model_rebuild()
 
 SendingArticulation.Model = _SendingArticulation.Model
 SendingArticulation.Type  = _SendingArticulation.Type
+
+# Built after `_SendingArticulation.Advisement` so the union includes it alongside `CourseGroup`
+_Item.Models = _Item.annotated() # type: ignore[assignment]
+_SendingItems: TypeAlias = _Item.Models
 
 _SendingArticulation.Model.model_rebuild(_types_namespace={
     '_Item': _Item,

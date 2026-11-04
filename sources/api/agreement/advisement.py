@@ -6,6 +6,8 @@ from typing     import Literal, TypeAlias
 from sources.api.types      import Models, Polymorphic
 
 class Advisement (Models):
+    class Models: pass
+
     class Model (Polymorphic):
         '''
         The advisement model can be composed on various places on the articulation. This is the base advisement model from which other advisement types are derived.
@@ -83,7 +85,7 @@ class Advisement (Models):
         UpTo    = 'UpTo'
         AtLeast = 'AtLeast'
 
-class AdditionalNToReach (Advisement.Model):
+class AdditionalNToReach (Advisement.Model, Advisement.Models):
     '''
     This model represents a sub instruction to complete additional units to reach N total.
 
@@ -92,10 +94,10 @@ class AdditionalNToReach (Advisement.Model):
 
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/advisement#complete-additional-units-advisement)
     '''
-    type:   Literal[Advisement.Type.AdditionalNToReach]
+    type:   Literal[Advisement.Type.AdditionalNToReach] # type: ignore[assignment]
     amount: int
 
-class NInAnyNAreas (Advisement.Model):
+class NInAnyNAreas (Advisement.Model, Advisement.Models):
     '''
     This model represents a sub instruction for selecting N Course(s)/Unit(s) from any N of the following area(s). Extends [Advisement Model][Advisement].
 
@@ -108,13 +110,13 @@ class NInAnyNAreas (Advisement.Model):
     [Advisement]: https://prod.assistng.org/apidocs/docs/articulation/model/advisement#advisement-base-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/advisement#n-in-any-n-areas-advisement)
     '''
-    type:           Literal[Advisement.Type.NInAnyNAreas]
+    type:           Literal[Advisement.Type.NInAnyNAreas] # type: ignore[assignment]
     amount:         int
     amountUnitType: Advisement.Unit.Type
     areaAmount:     int
     areaType:       Advisement.Area.Type
 
-class NInNDifferentAreas (Advisement.Model):
+class NInNDifferentAreas (Advisement.Model, Advisement.Models):
     '''
     This model represents a sub instruction for selecting N course(s)/Unit(s) in N area(s). Extends [Advisement Model][Advisement].
 
@@ -127,13 +129,13 @@ class NInNDifferentAreas (Advisement.Model):
     [Advisement]: https://prod.assistng.org/apidocs/docs/articulation/model/advisement#advisement-base-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/advisement#n-in-n-different-areas-advisement)
     '''
-    type:           Literal[Advisement.Type.NInNDifferentAreas]
+    type:           Literal[Advisement.Type.NInNDifferentAreas] # type: ignore[assignment]
     amount:         int
     amountUnitType: Advisement.Unit.Type
     areaAmount:     int
     areaType:       Advisement.Area.Type
 
-class NFromUnits (Advisement.Model):
+class NFromUnits (Advisement.Model, Advisement.Models):
     '''
     This model represents a sub instruction for selecting at least N course(s)/Unit(s) from this section. Extends [Advisement Model][Advisement].
 
@@ -145,12 +147,12 @@ class NFromUnits (Advisement.Model):
     [Advisement]: https://prod.assistng.org/apidocs/docs/articulation/model/advisement#advisement-base-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/advisement#n-from-units-advisement)
     '''
-    type:               Literal[Advisement.Type.NFromUnits]
+    type:               Literal[Advisement.Type.NFromUnits] # type: ignore[assignment]
     amount:             int
     amountQuantifier:   Advisement.Quantifier
     amountUnitType:     Advisement.Unit.Type
 
-class NFollowing (Advisement.Model):
+class NFollowing (Advisement.Model, Advisement.Models):
     '''
     This model represents a sub instruction for selecting N course(s)/Unit(s) from the following. Extends [Advisement Model][Advisement].
 
@@ -161,11 +163,11 @@ class NFollowing (Advisement.Model):
     [Advisement]: https://prod.assistng.org/apidocs/docs/articulation/model/advisement#advisement-base-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/advisement#n-following-advisement)
     '''
-    type:               Literal[Advisement.Type.NFollowing]
+    type:               Literal[Advisement.Type.NFollowing] # type: ignore[assignment]
     amount:             int
     amountUnitType:     Advisement.Unit.Type
 
-class NToNFollowing (Advisement.Model):
+class NToNFollowing (Advisement.Model, Advisement.Models):
     '''
     This model represents a sub instruction for selecting N to N course(s)/Unit(s) from the following. Extends [Advisement Model][Advisement].
 
@@ -177,9 +179,9 @@ class NToNFollowing (Advisement.Model):
     [Advisement]: https://prod.assistng.org/apidocs/docs/articulation/model/advisement#advisement-base-model
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/advisement#n-to-n-following-advisement)
     '''
-    type:               Literal[Advisement.Type.NToNFollowing]
+    type:               Literal[Advisement.Type.NToNFollowing] # type: ignore[assignment]
     fromAmount:         int
     toAmount:           int
     unitType:           Advisement.Unit.Type
 
-Advisement.Models = Advisement.annotated()
+Advisement.Models = Advisement.annotated() # type: ignore[assignment]

@@ -2,13 +2,14 @@ from __future__ import annotations
 
 from uuid       import UUID
 from enum       import StrEnum
-from typing     import ClassVar, Literal, TypeAlias
+from typing     import TYPE_CHECKING, ClassVar, Literal, TypeAlias
 
 from sources.api.agreement.attribute        import Attribute
 from sources.api.agreement.advisement       import Advisement
 from sources.api.agreement.instruction      import Instruction
 from sources.api.agreement.series           import Series as BaseSeries
 from sources.api.agreement.generaleducation import GeneralEducation as BaseGeneralEducation
+from sources.api.agreement.requirement      import Requirement as BaseRequirement
 from sources.api.course                     import Course as BaseCourse
 
 from sources.api.types import Monomorphic, Polymorphic, Models
@@ -31,14 +32,17 @@ class _Transferability:
     class Area (StrEnum):
         '''
         ```
-        Tranferability.Area: CSUGE | CSUAI | IGETC
+        Tranferability.Area: CSUGE | CSUAI | IGETC | CALGETC
         ```
         '''
-        CSUGE = 'CSUGE'
-        CSUAI = 'CSUAI'
-        IGETC = 'IGETC'
+        CSUGE   = 'CSUGE'
+        CSUAI   = 'CSUAI'
+        IGETC   = 'IGETC'
+        CALGETC = 'CALGETC' # Added per web scraper
 
 class _Asset (Models):
+    class Models: pass
+
     class Model (Polymorphic):
         '''
         The base template asset model in which other types of template assets are derived.
@@ -64,7 +68,7 @@ class _Asset (Models):
         General             = 'General'
         Requirements        = 'Requirements'
 
-    class GeneralText (Model):
+    class GeneralText (Model, Models):
         '''
         The template asset is general text. This model extends [Template Asset][Template Asset].
         
@@ -74,10 +78,10 @@ class _Asset (Models):
         [Template Asset]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-asset
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-general-text)
         '''
-        type:       Literal[_Asset.Type.GeneralText]
+        type:       Literal[_Asset.Type.GeneralText] # type: ignore[assignment]
         content:    str
 
-    class GeneralTitle (Model):
+    class GeneralTitle (Model, Models):
         '''
         The template asset is a requirement title. This model extends [Template Asset][Template Asset].
         
@@ -87,10 +91,10 @@ class _Asset (Models):
         [Template Asset]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-asset
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-requirement-title)
         '''
-        type:       Literal[_Asset.Type.GeneralTitle]
+        type:       Literal[_Asset.Type.GeneralTitle] # type: ignore[assignment]
         content:    str
 
-    class RequirementTitle (Model):
+    class RequirementTitle (Model, Models):
         '''
         The template asset is a requirement title. This model extends [Template Asset][Template Asset].
         
@@ -100,10 +104,12 @@ class _Asset (Models):
         [Template Asset]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-asset
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-requirement-title)
         '''
-        type:       Literal[_Asset.Type.RequirementTitle]
+        type:       Literal[_Asset.Type.RequirementTitle] # type: ignore[assignment]
         content:    str
 
 class _Item (Models):
+    class Models: pass
+
     class Model (Polymorphic):
         '''
         The base model for template group items. Other template group items are derived from this model.
@@ -124,7 +130,7 @@ class _Item (Models):
 
     Transferability:        ClassVar[TypeAlias] = _Transferability
 
-class _SectionHeader (_Item.Model):
+class _SectionHeader (_Item.Model, _Item.Models):
     '''
     This type of group item is `SectionHeader` and extends [Template Group Item][Template Group Item].
 
@@ -134,10 +140,10 @@ class _SectionHeader (_Item.Model):
     [Template Group Item]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-item
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-item-section-header)
     '''
-    type:       Literal[_Item.Type.SectionHeader]
+    type:       Literal[_Item.Type.SectionHeader] # type: ignore[assignment]
     content:    str
 
-class _Section (_Item.Model):
+class _Section (_Item.Model, _Item.Models):
     '''
     This type of group item is `Section` and extends [Template Group Item][Template Group Item].
     
@@ -149,11 +155,13 @@ class _Section (_Item.Model):
     [Template Group Item]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-item
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-item-section)
     '''
-    type:       Literal[_Item.Type.Section]
+    type:       Literal[_Item.Type.Section] # type: ignore[assignment]
     rows:       list[_Section.Row.Model]
     attributes: list[Attribute.Model]
 
     class Cell (Models):
+        class Models: pass
+
         class Model (Polymorphic):
             '''
             This is the base model for Template Group Section Cells. The other cell types derive from this model.
@@ -173,7 +181,7 @@ class _Section (_Item.Model):
         class Type (StrEnum):
             '''
             ```
-            Group.Section.Cell.Type: Course | Series | Requirement | GeneralEducation | CSUGE | CSUAI | IGETC
+            Group.Section.Cell.Type: Course | Series | Requirement | GeneralEducation | CSUGE | CSUAI | IGETC | CALGETC
             ```
             '''
             Course              = 'Course'
@@ -183,8 +191,9 @@ class _Section (_Item.Model):
             CSUGE               = 'CSUGE'
             CSUAI               = 'CSUAI'
             IGETC               = 'IGETC'
+            CALGETC             = 'CALGETC' # Added per web scraper
 
-    class Course (Cell.Model):
+    class Course (Cell.Model, Cell.Models):
         '''
         This type of cell is a `Course`. This model extends [Template Group Section Cell][Template Group Section Cell].
         
@@ -197,13 +206,13 @@ class _Section (_Item.Model):
         [Template Group Section Cell]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-course-cell)
         '''
-        type:                       Literal[_Section.Cell.Type.Course]
+        type:                       Literal[_Section.Cell.Type.Course] # type: ignore[assignment]
         course:                     BaseCourse.Model
         visibleCrossListedCourses:  list[BaseCourse.Cell.Crosslisted.Model]
         requisites:                 list[BaseCourse.Cell.Requisite.Model]
         courseAttributes:           list[Attribute.Model]
 
-    class Series (Cell.Model):
+    class Series (Cell.Model, Cell.Models):
         '''
         This type of cell is a `Series`. This model extends [Template Group Section Cell][Template Group Section Cell].
 
@@ -217,14 +226,14 @@ class _Section (_Item.Model):
         [Template Group Section Cell]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-series-cell)
         '''
-        type:                       Literal[_Section.Cell.Type.Series]
+        type:                       Literal[_Section.Cell.Type.Series] # type: ignore[assignment]
         series:                     BaseSeries.Model
         requisites:                 list[BaseSeries.Cell.Requisite.Model]
         visibleCrossListedCourses:  list[BaseSeries.Cell.Crosslisted.Model]
         seriesAttributes:           list[Attribute.Model]
         courseAttributes:           list[BaseSeries.Attribute.Model]
 
-    class GeneralEducation (Cell.Model):
+    class GeneralEducation (Cell.Model, Cell.Models):
         '''
         This type of cell is a `GeneralEducation`. This model extends [Template Group Section Cell][Template Group Section Cell].
         
@@ -235,11 +244,11 @@ class _Section (_Item.Model):
         [Template Group Section Cell]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-general-education-cell)
         '''
-        type:                           Literal[_Section.Cell.Type.GeneralEducation]
-        generalEducationArea:           BaseGeneralEducation
+        type:                           Literal[_Section.Cell.Type.GeneralEducation] # type: ignore[assignment]
+        generalEducationArea:           BaseGeneralEducation.Model
         generalEducationAreaAttributes: list[Attribute.Model]
 
-    class CSUGE (Cell.Model):
+    class CSUGE (Cell.Model, Cell.Models):
         '''
         This type of cell is a `CSUGE`. This model extends [Template Group Section Cell][Template Group Section Cell].
 
@@ -249,10 +258,10 @@ class _Section (_Item.Model):
         [Template Group Section Cell]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-csuge-cell)
         '''
-        type:           Literal[_Section.Cell.Type.CSUGE]
-        csuge:          _Transferability
+        type:           Literal[_Section.Cell.Type.CSUGE] # type: ignore[assignment]
+        csuge:          _Transferability.Model
 
-    class CSUAI (Cell.Model):
+    class CSUAI (Cell.Model, Cell.Models):
         '''
         This type of cell is a `CSUAI`. This model extends [Template Group Section Cell][Template Group Section Cell].
 
@@ -262,10 +271,10 @@ class _Section (_Item.Model):
         [Template Group Section Cell]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-csuai-cell)
         '''
-        type:           Literal[_Section.Cell.Type.CSUAI]
-        csuai:          _Transferability
+        type:           Literal[_Section.Cell.Type.CSUAI] # type: ignore[assignment]
+        csuai:          _Transferability.Model
 
-    class IGETC (Cell.Model):
+    class IGETC (Cell.Model, Cell.Models):
         '''
         This type of cell is a `IGETC`. This model extends [Template Group Section Cell][Template Group Section Cell].
 
@@ -275,8 +284,34 @@ class _Section (_Item.Model):
         [Template Group Section Cell]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell
         [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-igetc-cell)
         '''
-        type:           Literal[_Section.Cell.Type.IGETC]
-        igetc:          _Transferability
+        type:           Literal[_Section.Cell.Type.IGETC] # type: ignore[assignment]
+        igetc:          _Transferability.Model
+
+    class CALGETC (Cell.Model, Cell.Models):
+        '''
+        This type of cell is a `CALGETC`. This model extends [Template Group Section Cell][Template Group Section Cell]. Not yet in the API documentation; added per web scraper.
+
+        :calgetc:   The Cal-GETC transferability model
+        :​type:      `Group.Section.Cell.Type.CALGETC`
+
+        [Template Group Section Cell]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell
+        '''
+        type:           Literal[_Section.Cell.Type.CALGETC] # type: ignore[assignment]
+        calgetc:        _Transferability.Model
+
+    class Requirement (Cell.Model, Cell.Models):
+        '''
+        This type of cell is a `Requirement`. This model extends [Template Group Section Cell][Template Group Section Cell].
+
+        :requirement:           The campus requirement
+        :requirementAttributes: An array of attributes associated with the requirement
+        :​type:                  `Group.Section.Cell.Type.Requirement`
+
+        [Template Group Section Cell]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-cell
+        '''
+        type:                   Literal[_Section.Cell.Type.Requirement] # type: ignore[assignment]
+        requirement:            BaseRequirement.Model
+        requirementAttributes:  list[Attribute.Model]
 
     class Row:
         class Model (Monomorphic):
@@ -290,10 +325,10 @@ class _Section (_Item.Model):
             [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group-section-row)
             '''
             position:   int
-            cells:      list[_Section.Cell.Model]
+            cells:      list[_SectionCells] # Course | Series | ..., resolved below once all cell types are defined
             attributes: list[Attribute.Model]
 
-class _Group (_Asset.Model):
+class _Group (_Asset.Model, _Asset.Models):
     '''
     The template asset is a requirement group. This model extends [Template Asset][Template Asset].
 
@@ -303,9 +338,9 @@ class _Group (_Asset.Model):
     [Template Asset]: https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-asset
     [Documentation](https://prod.assistng.org/apidocs/docs/articulation/model/template-assets#template-group)
     '''
-    type:                           Literal[_Asset.Type.RequirementGroup]
+    type:                           Literal[_Asset.Type.RequirementGroup]  # type: ignore[assignment]
     hideSectionLetters:             bool
-    sections:                       list[_Item.Model]
+    sections:                       list[_GroupItems] # Section | SectionHeader, resolved below once both are defined
     attributes:                     list[Attribute.Model]
     showConjunctionBetweenSections: bool
     instruction:                    Instruction.Model | None
@@ -317,13 +352,20 @@ class _Group (_Asset.Model):
 
 # This class exists for a clean, navigable structure that avoids foward reference issues.
 class Asset (_Asset):
-    class Group(_Group):
-        Item:       ClassVar[TypeAlias] = _Item
-        Section:    ClassVar[TypeAlias] = _Section
+    Group = _Group
 
-Asset.Models                    = _Asset.annotated()
-Asset.Group.Item.Models         = _Item.annotated()
-Asset.Group.Section.Cell.Models = Asset.Group.Section.Cell.annotated()
+Asset.Models                    = _Asset.annotated()                    # type: ignore[assignment]
+Asset.Group.Item.Models         = _Item.annotated()                     # type: ignore[assignment]
+Asset.Group.Section.Cell.Models = Asset.Group.Section.Cell.annotated()  # type: ignore[assignment]
+
+# Resolve the forward references in `_Group.sections` and `_Section.Row.Model.cells`
+if TYPE_CHECKING:
+    _GroupItems:    TypeAlias = _SectionHeader | _Section
+    _SectionCells:  TypeAlias = (_Section.Course | _Section.Series | _Section.GeneralEducation | _Section.CSUGE
+                                 | _Section.CSUAI | _Section.IGETC | _Section.CALGETC | _Section.Requirement)
+else:
+    _GroupItems   = Asset.Group.Item.Models
+    _SectionCells = Asset.Group.Section.Cell.Models
 
 _Item.Model.model_rebuild()
 _Section.model_rebuild()
