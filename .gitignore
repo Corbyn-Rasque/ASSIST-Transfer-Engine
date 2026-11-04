@@ -4,4 +4,4 @@ __pycache__/
 .env
 .DS_Store
 .vscode/
-sources/web/data/*.json
+sources/web/data/*
