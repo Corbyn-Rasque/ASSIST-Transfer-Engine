@@ -88,32 +88,3 @@ def add_years():
         ''')
 
         connection.execute(insert, [year.model_dump() for year in years])
-
-from sources.web.agreements import Agreement
-# def get_courses():
-#     institutions = request.institutions()
-
-#     count = 0
-#     for institution in institutions[:1]:
-#         agreements = request.agreements(institution.id)
-
-#         print(institution.names[0])
-
-#         for agreement in agreements:
-#             for year in agreement.sendingYearIds:
-#                 if year >= 74:
-
-#                     print('here')
-#                     gold = request.agreement(year, institution.id, agreement.institutionParentId, Agreement.Type.ALLMAJORS)
-#                     count += 1
-#                     print('\t', agreement.institutionName, year)
-
-def get_ivc():
-    agreements = request.agreements(124)
-
-    for agreement in agreements:
-        for year in agreement.receivingYearIds:
-            if year >= 74:
-                request.agreement(year, agreement.institutionParentId, 124, Agreement.Type.ALLMAJORS)
-
-get_ivc()

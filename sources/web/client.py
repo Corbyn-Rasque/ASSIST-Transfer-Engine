@@ -40,17 +40,13 @@ class Client:
 
         match response.status_code:
             case 200:
-                print('200')
                 self.save(prepared, response)
             case 400:
-                print('400')
                 self.token()
                 return self.get(url, params)
             case 404:
-                print('404')
                 raise NotFound()
             case 429:
-                print('429')
                 time.sleep(Time.WAIT)
                 return self.get(url, params)
             

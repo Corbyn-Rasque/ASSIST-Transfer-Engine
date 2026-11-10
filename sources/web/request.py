@@ -116,30 +116,3 @@ class Request:
     def years(self) -> list[Year]:
         response = self.client.get(Endpoint.YEARS)
         return TypeAdapter(list[Year]).validate_json(response)
-
-# request = Request()
-
-# courselist = request.courses(124, 76, CourseList.Type.IGETC)
-
-# print(*courselist.courseInformationList[1], sep = '\n')
-
-# institutions = request.institutions()
-# print(institutions[0])
-
-# agreement = request.agreement(76, 124, 11, Agreement.Type.SENDINGPREFIX, 5768)
-# print(agreement)
-
-# agreements = request.agreements(124)
-# print(agreements)
-
-# transferrability = request.transferrability(124)
-# print(transferrability)
-
-# reports = request.reports(11, 124, 76, Reports.Type.MAJOR)
-# print(reports)
-
-# categories = request.categories(11, 124, 76)
-# print(categories)
-
-# years = request.years()
-# print(years)

@@ -1,0 +1,4 @@
+
+class Areas:
+    id: int
+    
