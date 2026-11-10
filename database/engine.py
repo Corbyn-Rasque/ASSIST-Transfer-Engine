@@ -1,7 +1,8 @@
-from sqlalchemy import create_engine, text, TextClause
-from sqlalchemy.pool import NullPool
+from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 import os
+
+from sources.web.request import Request
 
 load_dotenv()
 
@@ -16,11 +17,7 @@ URL = f'postgresql+psycopg2://{USER}:{PASS}@{HOST}:{PORT}/{DB}?sslmode=require'
 engine = create_engine(URL)
 
 
-from sources.web.request import Request
-
-request = Request()
-
-def add_or_update_institutions():
+def add_or_update_institutions(request: Request) -> None:
     upsert_institutions = text('''
         INSERT INTO institutions (id, code, category, year)
         VALUES (:id, :code, :category, :year)
@@ -77,7 +74,7 @@ def add_or_update_institutions():
             for n in i.termTypeAcademicYears
         ])
 
-def add_years():
+def add_years(request: Request) -> None:
     years = request.years()
 
     with engine.begin() as connection:

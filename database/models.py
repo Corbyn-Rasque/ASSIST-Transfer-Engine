@@ -1,4 +1,0 @@
-
-class Areas:
-    id: int
-    
